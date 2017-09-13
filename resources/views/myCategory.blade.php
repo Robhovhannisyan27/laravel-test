@@ -8,10 +8,9 @@
             </div>
         @endif
         <div class='row'>
-            
-               
-           
-               
+            <div style="float:right;" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-success">Add Category</button>
+            </div>              
         </div>
 
        
@@ -43,6 +42,21 @@
                 <div class="list-group" style="width: 20%; left: 5%;">
                 @foreach($categories as $category)
                     <a style='text-decoration: none;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a>
+                @endforeach
+                </div>
+            </div> 
+            
+        @endif
+
+
+        @if(isset($allCategories))
+            <div class="container" style="margin-top: 20px; position: absolute; left: 30% ">
+                <h2>My Categories</h2>
+                <div class="list-group" style="width: 30%; left: 5%;">
+                @foreach($allCategories as $category)
+                    
+                       <a style='text-decoration: none;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a>
+
                 @endforeach
                 </div>
             </div> 

@@ -53,11 +53,14 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="categories">My Categories</a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
+
                                         </a>
+
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -72,7 +75,9 @@
         </nav>
 
         @yield('content')
+        {{-- @include('home') --}}
     </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
