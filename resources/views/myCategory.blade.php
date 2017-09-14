@@ -56,6 +56,7 @@
                 @foreach($allCategories as $category)
                     
                        <a style='text-decoration: none;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a>
+                       
 
                 @endforeach
                 </div>

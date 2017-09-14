@@ -34,7 +34,7 @@
                             <input type="hidden" name="_method" value="PUT">
                             <input type="text" name="category_title" placeholder="Enter category name" style="width: 250px;"  value="{{$category->category_title}}"/>
                             <input type="submit" value="Update">
-                            <button type="button" style="margin-left: 10px;" data-dismiss="modal">Cancel</button>
+                            <button type="button" style="margin-left: 5px;" data-dismiss="modal">Cancel</button>
                         </form>
                     </div>
                     

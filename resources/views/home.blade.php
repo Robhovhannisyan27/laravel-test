@@ -7,13 +7,6 @@
                 {{ session()->get('status') }}
             </div>
         @endif
-        <div class='row'>
-            
-               
-           
-               
-        </div>
-
        
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
