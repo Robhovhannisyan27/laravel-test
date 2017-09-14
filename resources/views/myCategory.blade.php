@@ -10,14 +10,17 @@
         <div class='row'>
             <div style="float:right;" data-toggle="modal" data-target="#myModal">
                 <button type="button" class="btn btn-success">Add Category</button>
-            </div>              
+            </div>
+            <div style="float:right;margin-right: 20px;">
+                <a href="posts/add"><button type="button" class="btn btn-success">Add Post</button></a>
+            </div>               
         </div>
 
 
         @if(isset($categories))
-            <div  style="margin-top: 20px; position: absolute; left: 2% ">
+            <div  style="top:8%; position: absolute; left: 0 ">
                 <h2>Categories</h2>
-                <div class="list-group" style="overflow:scroll; height: 300px; width: 200px; left: 5%;">
+                <div class="list-group" style=" overflow:; max-height: 680px; width: 250px; left: 5%;">
                 @foreach($categories as $category)
                     <a style='text-decoration: none;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a>
                 @endforeach
@@ -26,11 +29,11 @@
             
         @endif
         @if(isset($allCategories))
-            <div  style="margin-top: 20px; width: 50%; margin-left: 30%;">
+            <div  style="margin-top: -3%; width: 50%; margin-left: 30%;">
                 <h2>My Categories</h2>
                 @foreach($allCategories as $category)
                     <div style="float: left;">
-                        <div style="float: left;"><a style='text-decoration: none; width: 150px;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a></div>
+                        <div style="float: left;"><a style='text-decoration: none; width: 250px;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a></div>
                         <div data-toggle="modal" data-target="#Edit" style="float: left; margin-left: 20px;" >
                             <button type="button" class="editButton btn btn-success" data-id="{{$category->id}}" data-title="{{$category->category_title}}">Edit Category</button>
                         </div>
@@ -55,11 +58,11 @@
                         <h4 class="modal-title">Update Category</h4>
                     </div>
                     <div class="modal-body">
-                        <form  id='editForm' method="post" action="{{url('/categories/')}}">
+                        <form  id='editForm' method="post" action="{{url('/categories')}}">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
                             <input type="text" id="category_title" name="category_title" placeholder="Enter category name" style="width: 250px;"  value=""/>
-                            <input type="submit" value="Update">
+                            <input type="submit" value="Update" id="edit_click">
                             <button type="button" style="margin-left: 5px;" data-dismiss="modal">Cancel</button>
                         </form>
                     </div>
@@ -81,7 +84,7 @@
                         <form method="post" id='deleteForm' style='float: left;' action="{{url('/categories/')}}">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="Yes">
+                            <input type="submit" id='delete_click' value="Yes">
                         </form>
                         <button type="button" style="margin-left: 15px;" data-dismiss="modal">Cancel</button>
                     </div>
@@ -101,7 +104,7 @@
                         <form method="post" action="/categories/store">
                             {{ csrf_field() }}
                             <input type="text" name="category_title" placeholder="Enter category name" style="width: 250px;" />
-                            <input type="submit" value="create">
+                            <input type="submit" value="Create">
                             <button type="button" style="margin-left: 2px;" data-dismiss="modal">Cancel</button>
                         </form>
                     </div>

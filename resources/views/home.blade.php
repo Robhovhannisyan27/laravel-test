@@ -31,9 +31,9 @@
 
 
         @if(isset($categories))
-            <div class="container" style="margin-top: 20px; position: absolute; left: 2% ">
+            <div class="container" style="top:8%;  position: absolute; left:0; ">
                 <h2>Categories</h2>
-                <div class="list-group" style="border:1px solid black;width:200px;height:300px;overflow:scroll; left: 5%;">
+                <div class="list-group" style=" width:250px; max-height: 680px; left: 5%;">
                 @foreach($categories as $category)
                     <a style='text-decoration: none;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a>
                 @endforeach

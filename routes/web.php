@@ -24,3 +24,4 @@ Route::get('/categories/{id}', 'CategoryController@show');
 Route::put('/categories/{id}', 'CategoryController@update');
 Route::delete('/categories/{id}', 'CategoryController@destroy');
 Route::get('/categories', 'CategoryController@allCategories');
+Route::get('/posts/add', 'PostController@store');
