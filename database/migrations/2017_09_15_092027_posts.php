@@ -16,8 +16,9 @@ class Posts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('category_id')->unsigned();
+            $table->string('category_title');
             $table->string('text');
+            $table->integer('user_id');
             $table->string('image');
             $table->timestamps();
         });

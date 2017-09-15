@@ -1,0 +1,16 @@
+.posts{
+	margin-left: 5%;
+}
+.post{
+	border:1px solid silver;
+	height: auto;
+	margin-left: 20px;
+	border-radius: 6px;
+	margin-top: 20px;
+	height: 250px;
+}
+.post_image img{
+	margin-top: 15px;
+	width: 100%;
+	position: relative;
+}

@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -54,6 +56,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="/categories">My Categories</a>
+                                        <a href='/posts/my'>My Posts</a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

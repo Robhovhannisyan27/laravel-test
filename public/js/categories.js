@@ -29,3 +29,5 @@ $('.deleteButton').click(function(){
 if($('.list-group').height() + 'px' == $('.list-group').css('max-height')){
 	$('.list-group').css('overflow','scroll');
 }
+
+

@@ -24,4 +24,9 @@ Route::get('/categories/{id}', 'CategoryController@show');
 Route::put('/categories/{id}', 'CategoryController@update');
 Route::delete('/categories/{id}', 'CategoryController@destroy');
 Route::get('/categories', 'CategoryController@allCategories');
-Route::get('/posts/add', 'PostController@store');
+Route::get('/posts/add', 'PostController@show');
+Route::post('/posts', 'PostController@store');
+Route::get('/posts/my', 'PostController@create');
+// Route::get('/posts/my', 'CategoryController@create');
+//Route::get('/categories', 'PostController@index');
+/*Route::get('/posts', 'PostController@store');*/

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Request as Req;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -21,13 +22,8 @@ class PostController extends Controller
     }
     public function index()
     {
-        //
-    	dd('11');
-    }
-
-    public function allCategories()
-    {
-        //
+      //  $category_post = $this->post->where('category_title',)->get();
+       // return view('category', ['category_post'=>$category_post]);
     }
 
     /**
@@ -37,7 +33,8 @@ class PostController extends Controller
      */
     public function create()
     {
-       //
+       $category_post = $this->post->where('user_id',Auth::id())->get();
+        return view('category', ['category_post'=>$category_post]);
     }
 
     /**
@@ -46,11 +43,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Category $category)
+    public function store(Request $request )
     {
-        $categories = $category->get();
-        $allCategories=$category->where('user_id',Auth::id())->get();
-        return view('addpost',['categories'=>$categories, 'allCategories'=>$allCategories]);
+        $photo =Req::file('photo')->getClientOriginalName();
+        if($this->post->create(['title'=>$request->input('title'), 'text'=>$request->input('text'), 'image'=>$photo,'category_title'=>$request->input('select'), 'user_id'=>Auth::id()]))
+        {
+            return redirect()->back()->with('status','Post Created');
+        }
+        else
+        {
+            return redirect()->back()->with('status','Something went wrong!!!');
+        }
+        
     }
 
     /**
@@ -59,10 +63,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request , Category $category)
     {
-        //
-       
+        
+        $categories = $category->get();
+        $allCategories=$category->where('user_id',Auth::id())->get();
+        return view('addpost',['categories'=>$categories, 'allCategories'=>$allCategories]);
     }
 
     /**
