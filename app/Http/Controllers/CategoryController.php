@@ -20,8 +20,8 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        // $categories = $this->category->get();
-        // return view('home', ['categories' => $categories]);
+         $categories = $this->category->get();
+         return view('home', ['categories' => $categories]);
 
     }
 
