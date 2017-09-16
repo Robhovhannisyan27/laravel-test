@@ -16,9 +16,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(Post $post)
+    public function __construct(Post $post, Category $category)
     {
         $this->post = $post;
+        $this->category = $category;
     }
     public function index()
     {
@@ -33,8 +34,10 @@ class PostController extends Controller
      */
     public function create()
     {
-       $category_post = $this->post->where('user_id',Auth::id())->get();
-        return view('category', ['category_post'=>$category_post]);
+        $allCategories=$this->category->where('user_id',Auth::id())->get();
+        $categories = $this->category->get();
+        $category_post = $this->post->where('user_id',Auth::id())->get();
+        return view('category', ['category_post'=>$category_post , 'categories'=>$categories, 'allCategories'=>$allCategories]);
     }
 
     /**
@@ -63,12 +66,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , Category $category)
+    public function show(Request $request)
     {
-        
-        $categories = $category->get();
-        $allCategories=$category->where('user_id',Auth::id())->get();
-        return view('addpost',['categories'=>$categories, 'allCategories'=>$allCategories]);
+        $categories = $this->category->get();
+        $allCategories=$this->category->where('user_id',Auth::id())->get();
+        return view('category',['categories'=>$categories, 'allCategories'=>$allCategories]);
     }
 
     /**

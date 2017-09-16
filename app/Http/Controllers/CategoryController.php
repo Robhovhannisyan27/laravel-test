@@ -66,7 +66,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
         $category = $this->category->find($id);
         $categories = $this->category->get();
         return view('category', ['category' => $category, 'categories' => $categories]);
