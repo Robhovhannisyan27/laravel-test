@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Request as Req;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Post;
 use App\Category;
+use Illuminate\Validation;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -23,8 +24,7 @@ class PostController extends Controller
     }
     public function index()
     {
-      //  $category_post = $this->post->where('category_title',)->get();
-       // return view('category', ['category_post'=>$category_post]);
+          
     }
 
     /**
@@ -32,12 +32,30 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PostRequest $request)
     {
-        $allCategories=$this->category->where('user_id',Auth::id())->get();
-        $categories = $this->category->get();
-        $category_post = $this->post->where('user_id',Auth::id())->get();
-        return view('category', ['category_post'=>$category_post , 'categories'=>$categories, 'allCategories'=>$allCategories]);
+
+        $inputs=$request->all();
+        $inputs['user_id'] = Auth::id();
+        unset($inputs['_token']);
+
+        if($request->hasFile('image')){   
+            $image = $request->file('image');
+            $inputs['image'] = date("Y-m-d").'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('/image'), $inputs['image']);
+            // $image =$request->file('image')->getClientOriginalName();
+        }
+         
+
+         if($this->post->create($inputs))
+        {
+            return redirect()->back()->with('success','Post Created');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong!!!');
+        }
+        
     }
 
     /**
@@ -46,31 +64,33 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store()
     {
-        $photo =Req::file('photo')->getClientOriginalName();
-        if($this->post->create(['title'=>$request->input('title'), 'text'=>$request->input('text'), 'image'=>$photo,'category_title'=>$request->input('select'), 'user_id'=>Auth::id()]))
-        {
-            return redirect()->back()->with('status','Post Created');
-        }
-        else
-        {
-            return redirect()->back()->with('status','Something went wrong!!!');
-        }
+        
+        $allCategories=$this->category->where('user_id',Auth::id())->get();
+        $categories = $this->category->get();
+        $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->get();
+        return view('my-posts', ['category_post'=>$category_post , 'categories'=>$categories, 'allCategories'=>$allCategories]);
         
     }
 
+
+
+    public function post($id){
+        $allCategories=$this->category->get();
+        $posts=$this->post->where('id',$id)->get();
+        return view('post',['posts'=>$posts, 'allCategories'=>$allCategories]);
+
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
-        $categories = $this->category->get();
-        $allCategories=$this->category->where('user_id',Auth::id())->get();
-        return view('category',['categories'=>$categories, 'allCategories'=>$allCategories]);
+        return view('post');
     }
 
     /**

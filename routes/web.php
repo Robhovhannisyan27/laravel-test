@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -24,8 +25,7 @@ Route::get('/categories/{id}', 'CategoryController@show');
 Route::put('/categories/{id}', 'CategoryController@update');
 Route::delete('/categories/{id}', 'CategoryController@destroy');
 Route::get('/categories', 'CategoryController@allCategories');
-Route::post('/posts/my', 'PostController@store');
-Route::get('/posts/my', 'PostController@create');
-// Route::get('/posts/my', 'CategoryController@create');
-//Route::get('/categories', 'PostController@index');
-/*Route::get('/posts', 'PostController@store');*/
+Route::post('/posts/my-posts', 'PostController@create');
+Route::get('/posts/my-posts', 'PostController@store');
+Route::get('/posts/{id}', 'PostController@show');
+Route::get('/posts/{id}','PostController@post');

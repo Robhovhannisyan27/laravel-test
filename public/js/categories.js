@@ -1,4 +1,6 @@
 
+
+
 $('.editButton').click(function() {
 	var id = $(this).attr('data-id');
 	var title = $(this).attr('data-title');
@@ -31,3 +33,14 @@ if($('.list-group').height() + 'px' == $('.list-group').css('max-height')){
 }
 
 
+
+// $('.submit').click(function(){
+// 	// alert(1);
+// 	// alert($('.image').val());
+// 	// if($('.image').val() == '')
+// 	// 	$('.image').val()='no-image.png';
+// 	var input = $(this).parent().find( "input:file" );
+// 	alert(input.length);
+// 	alert(input);
+
+// });

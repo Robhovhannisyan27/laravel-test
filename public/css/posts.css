@@ -13,4 +13,12 @@
 	margin-top: 15px;
 	width: 100%;
 	position: relative;
+	height: 150px;
+}
+.category_title span{
+	float: right;
+	opacity: 0.5;
+}
+.large_post_image img{
+	height: 400px;
 }

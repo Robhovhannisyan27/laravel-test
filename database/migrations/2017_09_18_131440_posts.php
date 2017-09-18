@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class Posts extends Migration
 {
     /**
@@ -17,10 +16,10 @@ class Posts extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('category_title');
-          //  $table->integer('category_id');
+         //   $table->integer('category_id');
             $table->string('text');
             $table->integer('user_id');
-            $table->string('image');
+            $table->string('image')->default('no-image.png');
             $table->timestamps();
         });
     }

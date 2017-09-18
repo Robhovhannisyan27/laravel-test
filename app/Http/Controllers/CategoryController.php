@@ -52,9 +52,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         if($this->category->create(['category_title'=>$request->input('category_title'),'user_id'=>Auth::id()])){
-            return redirect()->back()->with('status', 'Category created!');
+            return redirect()->back()->with('success', 'Category created!');
         } else {
-            return redirect()->back()->with('status', 'Something went wrong!!!');
+            return redirect()->back()->with('error', 'Something went wrong!!!');
         }
     }
 
@@ -97,13 +97,13 @@ class CategoryController extends Controller
         unset($inputs['_method']);
         if($inputs['category_title']=='')
         {
-            return redirect()->back()->with('status', 'Error');
+            return redirect()->back()->with('error', 'Error');
         }
         if($this->category->where('id', $id)->update($inputs)){
-             return redirect()->back()->with('status', 'Category name changed');
+             return redirect()->back()->with('success', 'Category name changed');
         }
         else{
-             return redirect()->back()->with('status', 'Error');
+             return redirect()->back()->with('error', 'Error');
         }
     }
 
