@@ -60,11 +60,9 @@
             @foreach($category_post as $post)
                 <a href="/posts/{{$post->id}}">
                 <div class="post col-sm-3">
-                    <input type="hidden" name="category_id" >
                     <div class="post_image"><img src="../image/{{$post->image}}" /></div>
                     <div class="post_title">{{$post->title}}</div>
                     <div class="post_text"><p>{{$post->text}}</p></div>
-                    <div class="category_title"><span>{{$post->category_title}}</span></div> 
                 </div>
                 </a>
 

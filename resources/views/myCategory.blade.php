@@ -2,10 +2,25 @@
 
  @section('content')
     <div class="container">
-        @if(session()->has('status'))
-            <div class="alert alert-success">
-                {{ session()->get('status') }}
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
+        @if ( isset($errors) && count($errors) > 0)
+        <div class="col-sm-12">
+            <div class="alert alert-danger col-sm-8 col-sm-offset-2">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
+        </div>
+
         @endif
         <div class='row'>
             <div style="float:right;" data-toggle="modal" data-target="#myModal">

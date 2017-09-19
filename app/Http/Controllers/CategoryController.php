@@ -39,8 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->get();
-        return view('category', ['categories' => $categories]); 
+        
     }
 
     /**
@@ -67,8 +66,9 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = $this->category->find($id);
+        $category_posts=$category->posts;
         $categories = $this->category->get();
-        return view('category', ['category' => $category, 'categories' => $categories]);
+        return view('category', ['category_posts'=>$category_posts, 'category' => $category, 'categories' => $categories]);
 
     }
 

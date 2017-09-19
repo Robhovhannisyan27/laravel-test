@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class Posts extends Migration
+class CreatePosts extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,14 @@ class Posts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('category_title');
-         //   $table->integer('category_id');
+            $table->integer('category_id')->unsigned()->index();
             $table->string('text');
             $table->integer('user_id');
             $table->string('image')->default('no-image.png');
             $table->timestamps();
+            $table->longtext('longtext');
+
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -31,6 +33,9 @@ class Posts extends Migration
      */
     public function down()
     {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign('posts_category_id_foreign');
+        });
         Schema::dropIfExists('posts');
     }
 }

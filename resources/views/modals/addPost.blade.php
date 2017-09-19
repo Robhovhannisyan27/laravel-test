@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <textarea class="form-control" rows="4" name="text" placeholder="Text"></textarea>
+                            <textarea class="form-control" rows="4" name="longtext" placeholder="Text"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -26,14 +26,15 @@
                     </div>
                     <div class="form-group" style="margin-left: 10%;">
                         <label for='category' style="float: left; ">Choose a category</label>
-                        <select name='category_title' class="col-sm-4" >
+                        <select name='category_id' class="col-sm-4" >
                             <option></option>
-                            @if(isset($allCategories))
-                                @foreach($allCategories as $category)
-                                    <option>{{ $category->category_title }}</option>
+                            @if(isset($categories))
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category_title }}</option>
                                 @endforeach
                             @endif  
                         </select>
+
                     </div>
                     <div class="form-group" style="margin-left: 70px;">
                         <div class="col-sm-7 col-sm-offset-2">

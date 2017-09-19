@@ -22,3 +22,14 @@
 .large_post_image img{
 	height: 400px;
 }
+
+#editPostForm textarea{
+	margin-top: 20px;
+	width: 80%;
+}
+#editPostForm input{
+	margin-top: 20px;
+}
+.image{
+	width: 80%;
+}

@@ -1,6 +1,5 @@
 
 
-
 $('.editButton').click(function() {
 	var id = $(this).attr('data-id');
 	var title = $(this).attr('data-title');
@@ -32,15 +31,29 @@ if($('.list-group').height() + 'px' == $('.list-group').css('max-height')){
 	$('.list-group').css('overflow','scroll');
 }
 
+$('.delete_post_button').click(function(){
+	var id = $(this).attr('data-id');
+	var title = $(this).attr('data-title');
+	var delete_post= $('#deletePostForm').attr('action');
+	//$('#delete_post').html(title);
+	$('#delete_click_post').click(function(){
+		delete_post = delete_post.concat('/');
+		id = delete_post.concat(id);
+		$('#deletePostForm').attr('action',id);
+		
+	})
 
+})
 
-// $('.submit').click(function(){
-// 	// alert(1);
-// 	// alert($('.image').val());
-// 	// if($('.image').val() == '')
-// 	// 	$('.image').val()='no-image.png';
-// 	var input = $(this).parent().find( "input:file" );
-// 	alert(input.length);
-// 	alert(input);
+$('.edit_post_button').click(function() {
+	var id = $(this).attr('data-id');
+	var title = $(this).attr('data-title');
+	var post= $('#editPostForm').attr('action');
+	//$('#category_title').attr('value',title);
+	$('#edit_post_click').click(function(){
+		post = post.concat('/');
+		id = post.concat(id);
+		$('#editPostForm').attr('action',id);
+	})
+})
 
-// });
