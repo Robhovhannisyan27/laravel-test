@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Post;
 use App\Category;
 use Illuminate\Validation;
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -22,19 +22,38 @@ class PostController extends Controller
         $this->post = $post;
         $this->category = $category;
     }
+
+
+
     public function index()
     {
-        //  
+        $myCategories=$this->category->where('user_id',Auth::id())->get();
+        $categories = $this->category->get();
+        $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate('9');
+        return view('my-posts', ['category_post'=>$category_post , 'categories'=>$categories, 'myCategories'=>$myCategories]);
     }
-    
+
+    public function errors(Request $request){
+        if($request->ajax()) {
+            return view('my-posts');
+        }
+        dd('ok');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(PostRequest $request)
-    {
+    
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PostRequest $request)
+    {
         $inputs=$request->all();
         $inputs['user_id'] = Auth::id();
         unset($inputs['_token']);
@@ -59,28 +78,8 @@ class PostController extends Controller
         {
             return redirect()->back()->with('error','Something went wrong!!!');
         }
-        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-        
-        $myCategories=$this->category->where('user_id',Auth::id())->get();
-        $categories = $this->category->get();
-        $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->get();
-        return view('my-posts', ['category_post'=>$category_post , 'categories'=>$categories, 'myCategories'=>$myCategories]);
-        
-    }
-
-
-
-    
     /**
      * Display the specified resource.
      *
@@ -92,7 +91,6 @@ class PostController extends Controller
         $myPosts=$this->post->where('user_id',Auth::id())->where('id',$id)->get();
         $posts=$this->post->where('id',$id)->get();
         return view('post',['posts'=>$posts, 'myPosts'=>$myPosts]);
-
     }
 
     /**
@@ -101,11 +99,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
-    {
-        //
-        
-    }
+    
+
     /**
      * Update the specified resource in storage.
      *
@@ -113,10 +108,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-      	$inputs = $request->all();
-        
+        $inputs = $request->all();
         unset($inputs['_token']);
         unset($inputs['_method']);
         foreach($inputs as $key => $value){
@@ -132,8 +126,8 @@ class PostController extends Controller
         else{
              return redirect()->back()->with('error', 'Error');
         } 
-     }
-
+     
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -141,12 +135,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
+    public function destroy($id)
     {
-       //dd($request->all());
         $this->post->where('id',$id)->delete();
-        return redirect('/posts/my-posts');
+        return redirect('/posts/');
     }
-
-
 }

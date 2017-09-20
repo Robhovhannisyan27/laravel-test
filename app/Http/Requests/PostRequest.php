@@ -25,9 +25,8 @@ class PostRequest extends FormRequest
     {
         
             return [
-                    'photo' => 'image',
+                    'image' => 'image',
                     'title' => 'required',
-                    
                     'longtext' => 'required',
                     'category_id' => 'required',
                   ];
@@ -37,7 +36,9 @@ class PostRequest extends FormRequest
    public function messages()
     {
         return [
-
+            'image' =>'The file must be a picture',
+            'longtext.required' => 'The text field is required',
+            'category_id.required' => 'Choose a category!!'
        ];
     }
 }

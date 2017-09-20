@@ -67,6 +67,8 @@
                 </a>
 
             @endforeach
+
+            
         @endif
         
     </div>
@@ -77,9 +79,11 @@
             <button type="button" class="btn btn-success">Add Post</button>
         </div>
     </div> 
-</div>
-               
-        
+
+</div>               
+    <div class="paginate">{{ $category_post->links() }}</div>
+
+
     @include('modals.addPost')
 @endsection
 

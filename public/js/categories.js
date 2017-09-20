@@ -1,4 +1,28 @@
+// $(document).ready(function(){
+// 	$.ajaxSetup({
+// 		headers: {
+// 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+// 		        }
+// 	});
 
+// 	$('#test').click(function(ev){
+// 		ev.preventDefault();
+// 		var title = $('#title').val();
+// 		var text = $('#text').val();
+// 		var image = $('#image').val();
+// 		var select = $('#select_category').val();
+// 		alert($select);
+// 		$.ajax({
+// 			url: '/posts',
+// 			cache: false,
+//         	data: {'title': title, 'text': text, '$image':image, 'category_id':select }, 
+//         	type: "POST",
+//         	success: function (data) {
+//         	    alert('ok');
+//         	} 
+// 		})
+// 	})
+// });
 
 $('.editButton').click(function() {
 	var id = $(this).attr('data-id');

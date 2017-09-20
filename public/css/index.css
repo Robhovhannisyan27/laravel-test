@@ -33,3 +33,8 @@
 .image{
 	width: 80%;
 }
+.paginate{
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

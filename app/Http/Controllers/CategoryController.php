@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
-use App\Category;
 
 class CategoryController extends Controller
 {
@@ -18,14 +19,9 @@ class CategoryController extends Controller
     {
         $this->category = $category;
     }
+
+
     public function index()
-    {
-         $categories = $this->category->get();
-         return view('home', ['categories' => $categories]);
-
-    }
-
-    public function allCategories()
     {
         $allCategories=$this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
@@ -39,7 +35,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -63,13 +59,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Post $post)
     {
         $category = $this->category->find($id);
-        $category_posts=$category->posts;
+        $category_posts=$post->where('category_id',$id)->Paginate('9');
         $categories = $this->category->get();
-        return view('category', ['category_posts'=>$category_posts, 'category' => $category, 'categories' => $categories]);
-
+        return view('category', ['category_posts'=>$category_posts, 
+                                 'category' => $category,
+                                 'categories' => $categories]);
     }
 
     /**
@@ -78,11 +75,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
+    public function edit($id)
     {
-        // dd($id, $request->all());
-        
+        //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -113,12 +110,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
+    public function destroy($id)
     {
-       //dd($request->all());
         $this->category->where('id',$id)->delete();
         return redirect('/categories');
     }
-
-
 }

@@ -16,7 +16,7 @@
                         <h4 class="modal-title">Add Category</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/categories/store">
+                        <form method="post" action="/categories">
                             {{ csrf_field() }}
                             <input type="text" name="category_title" placeholder="Enter category name" style="width: 250px;" />
                             <input type="submit" value="create">

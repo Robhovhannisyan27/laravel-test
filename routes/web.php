@@ -18,15 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'CategoryController@index')->name('home');
-//Route::post('/categories/edit', 'CategoryController@edit');
-Route::post('/categories/store', 'CategoryController@store');
-Route::get('/categories/{id}', 'CategoryController@show');
-Route::put('/categories/{id}', 'CategoryController@update');
-Route::delete('/categories/{id}', 'CategoryController@destroy');
-Route::get('/categories', 'CategoryController@allCategories');
-Route::post('/posts/my-posts', 'PostController@create');
-Route::get('/posts/my-posts', 'PostController@store');
-Route::get('/posts/{id}', 'PostController@show');
-Route::put('/posts/{id}', 'PostController@update');
-Route::delete('/posts/{id}', 'PostController@destroy');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+Route::resource('posts', 'PostController', ['except' => ['create', 'edit']]);
