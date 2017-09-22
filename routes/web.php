@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
 Route::resource('posts', 'PostController', ['except' => ['create', 'edit']]);
+

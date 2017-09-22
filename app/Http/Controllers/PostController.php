@@ -69,14 +69,14 @@ class PostController extends Controller
             $inputs['image'] = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('/image'), $inputs['image']);
         }
-         
-        if($this->post->create($inputs))
+         $post = $this->post->create($inputs);
+        if($post)
         {
-            return redirect()->back()->with('success','Post Created');
+            return response()->json(['post' => $post], 200);
         }
         else
         {
-            return redirect()->back()->with('error','Something went wrong!!!');
+            return response()->json(['error' => 'Something went wrong!!!'], 400);
         }
     }
 

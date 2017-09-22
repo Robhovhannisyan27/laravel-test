@@ -6,26 +6,12 @@
                 <h4 class="modal-title">Add Post</h4>
             </div>
             <div class="modal-body">
-                {{-- @if(session()->has('status'))
-                    <div class="alert alert-success">
-                        {{ session()->get('status') }}
-                    </div>
-                @endif
-                @if ( isset($errors) && count($errors) > 0)
-                <div class="col-sm-12">
-                    <div class="alert alert-danger col-sm-8 col-sm-offset-2">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div>
+                    <div id="error_title">The title field is required</div>
+                    <div id="error_text">The text field is required</div>
+                    <div id="error_image">File does not match the format</div>
+                    <div id="error_category">Choose a category!!</div>
                 </div>
-
-                @endif --}}
                 <form class="form-horizontal post_form" role="form" style="margin-left: 20%; margin-top: 30px;" enctype="multipart/form-data" method="post" action="/posts/" id="post_form">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -35,12 +21,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <textarea class="form-control" id='text' rows="4" name="longtext" placeholder="Text"></textarea>
+                            <textarea class="form-control" id='text' rows="4" name="longtext" placeholder="Text" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <input name='image' type="file"  id='image' class="form-control" >
+                            <input name='image' type="file"  id='image' class="form-control">
                         </div>
                     </div>
                     <div class="form-group" style="margin-left: 10%;">

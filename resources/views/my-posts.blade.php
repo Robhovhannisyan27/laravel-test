@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container" style="width: 100%">
-    @if(session()->has('status'))
+    {{-- @if(session()->has('status'))
         <div class="alert alert-success">
             {{ session()->get('status') }}
         </div>
@@ -23,7 +23,7 @@
     </div>
 
     @endif
-
+ --}}
     @if (session('success'))
         <div class="col-sm-12">
             <div class="alert alert-success col-sm-8 col-sm-offset-2">
@@ -55,7 +55,7 @@
     </div>
     
 
-    <div class="col-sm-8 row posts">
+    <div class="col-sm-8 row posts" id='addPosts'>
         @if(isset($category_post))
             @foreach($category_post as $post)
                 <a href="/posts/{{$post->id}}">

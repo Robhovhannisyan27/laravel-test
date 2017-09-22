@@ -38,3 +38,10 @@
     left: 50%;
     transform: translateX(-50%);
 }
+#error_title, #error_text,#error_image, #error_category{
+	
+	margin-left: 34%;
+	color:red;
+	display: none;
+	height: 20px;
+}

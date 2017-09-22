@@ -10,8 +10,8 @@
                     {{ csrf_field() }}
                     @foreach($myPosts as $post)
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="text" id="post_title" name="title" placeholder="{{$post->title}}" style="width: 250px;"  value=""/>
-                        <textarea class="form-control" rows="4" name="longtext" placeholder="{{$post->text}}"></textarea>
+                        <input type="text" id="post_title" name="title" value="{{$post->title}}" style="width: 250px;" />
+                        <textarea class="form-control" rows="4" name="longtext">{{$post->text}}</textarea>
                         <input name='image' type="file"  class="image form-control" >
                         <input type="submit" value="Update" id="edit_post_click">
                         <button type="button" style="margin-left: 5px;" data-dismiss="modal">Cancel</button>
