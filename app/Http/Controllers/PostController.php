@@ -69,7 +69,11 @@ class PostController extends Controller
             $inputs['image'] = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('/image'), $inputs['image']);
         }
-         $post = $this->post->create($inputs);
+        else{
+            $inputs['image']='no-image.png';
+        }
+        
+        $post = $this->post->create($inputs);
         if($post)
         {
             return response()->json(['post' => $post], 200);
@@ -108,7 +112,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $inputs = $request->all();
         unset($inputs['_token']);

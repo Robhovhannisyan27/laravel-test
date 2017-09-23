@@ -22,15 +22,17 @@
         </div>
 
         @endif
-        <div class='row'>
-            <div style="float:right;" data-toggle="modal" data-target="#myModal">
-                <button type="button" class="btn btn-success">Add Category</button>
+        @guest
+        @else
+            <div class='row'>
+                <div style="float:right;" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-success">Add Category</button>
+                </div>
+                <div style="float:right;margin-right: 20px;" data-toggle="modal" data-target="#addPost">
+                    <button type="button" class="btn btn-success">Add Post</button>
+                </div>               
             </div>
-            <div style="float:right;margin-right: 20px;" data-toggle="modal" data-target="#addPost">
-                <button type="button" class="btn btn-success">Add Post</button>
-            </div>               
-        </div>
-
+        @endguest
 
         @if(isset($categories))
             <div  style="top:8%; position: absolute; left: 0 ">
@@ -43,10 +45,10 @@
             </div> 
             
         @endif
-        @if(isset($allCategories))
+        @if(isset($myCategories))
             <div  style="margin-top: -3%; width: 50%; margin-left: 30%;">
                 <h2>My Categories</h2>
-                @foreach($allCategories as $category)
+                @foreach($myCategories as $category)
                     <div style="float: left;">
                         <div style="float: left;"><a style='text-decoration: none; width: 250px;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a></div>
                         <div data-toggle="modal" data-target="#Edit" style="float: left; margin-left: 20px;" >

@@ -11,9 +11,10 @@ $(document).ready(function(){
 		var text = $('#text').val();
 		var image = document.getElementById("image").files[0];
 		var category_id = $('#select_category').val();
+		
 		var formData = new FormData();
 		// 
-		alert(1);
+		
 		if(title == ''){
 			$('#error_title').css('display', 'block');
 		}
@@ -36,14 +37,9 @@ $(document).ready(function(){
 			$('#error_category').css('display', 'none');
 		}
 		
-		if(image == '')
-		{
-			image='no-image.png';
-		}
-		else
-		{
+		if(image !== undefined){
 			var koord=image.name.indexOf('.');
-			var format=image.name.substring(koord+1);
+			var format=image.name.substr(koord+1);
 			if(format!='jpg' && format!='png')
 			{
 				$('#error_image').css('display', 'block');
@@ -52,17 +48,18 @@ $(document).ready(function(){
 			{
 				$('#error_image').css('display', 'none');
 			}
-			
-		}
-
-		alert(6);
+		}	
+		
+		
 		if($('#error_title').css('display')=='none' && $('#error_text').css('display')=='none' && $('#error_category').css('display')== 'none' && $('#error_image').css('display')== 'none' ){
 			formData.append("title",title);
 			formData.append("longtext",text);
-			formData.append("image",image);
+			if(image !== undefined){
+				formData.append("image",image);
+			}
 			formData.append("category_id",category_id);
 				
-			 console.log(formData);
+			
 			$.ajax({
 				url: '/posts',
 	        	type: "POST",
@@ -81,6 +78,7 @@ $(document).ready(function(){
 	                addPosts += "<div class='post_text'><p>" + response.post.longtext + "</p></div></div></a>"; 	
 	                    	
 	        	    $('#addPosts').prepend(addPosts);
+	        	    window.location.reload();
 	    
 	        	} ,
 	        	error: function(response){

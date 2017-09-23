@@ -23,9 +23,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $allCategories=$this->category->where('user_id',Auth::id())->get();
+        $myCategories=$this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
-        return view('myCategory', ['allCategories' => $allCategories, 'categories' => $categories]);
+        return view('myCategory', ['myCategories' => $myCategories, 'categories' => $categories]);
     }
 
     /**

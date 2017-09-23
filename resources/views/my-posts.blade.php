@@ -73,12 +73,14 @@
         
     </div>
 
-
-    <div class="add_post col-sm-1"  data-toggle="modal" data-target="#addPost">
-        <div style="float:right;margin-right: 20px;">
-            <button type="button" class="btn btn-success">Add Post</button>
+    @guest
+    @else
+        <div class="add_post col-sm-1"  data-toggle="modal" data-target="#addPost">
+            <div style="float:right;margin-right: 20px;">
+                <button type="button" class="btn btn-success">Add Post</button>
+            </div>
         </div>
-    </div> 
+    @endguest     
 
 </div>               
     <div class="paginate">{{ $category_post->links() }}</div>

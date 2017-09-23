@@ -26,15 +26,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <input name='image' type="file"  id='image' class="form-control">
+                            <input name='image'  type="file"  id='image' class="form-control">
                         </div>
                     </div>
                     <div class="form-group" style="margin-left: 10%;">
                         <label for='category' style="float: left; ">Choose a category</label>
                         <select name='category_id' id='select_category' class="col-sm-4" >
                             <option></option>
-                            @if(isset($categories))
-                                @foreach($categories as $category)
+                            @if(isset($myCategories))
+                                @foreach($myCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->category_title }}</option>
                                 @endforeach
                             @endif  
