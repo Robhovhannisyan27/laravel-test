@@ -23,11 +23,11 @@
 	height: 400px;
 }
 
-#editPostForm textarea{
+#edit_post_form textarea{
 	margin-top: 20px;
 	width: 80%;
 }
-#editPostForm input{
+#edit_post_form input{
 	margin-top: 20px;
 }
 .image{

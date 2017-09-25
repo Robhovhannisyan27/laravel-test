@@ -66,7 +66,7 @@
     @endguest
 </div>
     <div class="paginate">{{ $category_posts->links() }}</div>
-    @include('modals.addPost')               
+    @include('modals.add_post')               
         
     
 @endsection

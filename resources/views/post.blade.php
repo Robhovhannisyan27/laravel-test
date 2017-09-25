@@ -34,9 +34,9 @@
    @endif
 
     <div class='col-sm-2 row'>
-        @if(isset($myPosts))
+        @if(isset($my_posts))
         
-          @foreach($myPosts as $post)
+          @foreach($my_posts as $post)
             <div style="float:right;" data-toggle="modal" data-target="#edit_post">
                 <button type="button" data-id="{{$post->id}}" data-title="{{$post->title}}" class="edit_post_button btn btn-success">Edit Post</button>
             </div>
@@ -48,8 +48,8 @@
     </div> 
            
  </div>       
-    @include('modals.deletePost')
-    @include('modals.editPost')
+    @include('modals.delete_post')
+    @include('modals.edit_post')
 @endsection
 
 

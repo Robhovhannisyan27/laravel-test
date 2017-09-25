@@ -33,8 +33,8 @@
                         <label for='category' style="float: left; ">Choose a category</label>
                         <select name='category_id' id='select_category' class="col-sm-4" >
                             <option></option>
-                            @if(isset($myCategories))
-                                @foreach($myCategories as $category)
+                            @if(isset($my_categories))
+                                @foreach($my_categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->category_title }}</option>
                                 @endforeach
                             @endif  

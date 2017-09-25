@@ -6,9 +6,9 @@
                 <h4 class="modal-title">Update Post</h4>
             </div>
             <div class="modal-body">
-                <form  method="post" id='editPostForm'  action="{{url('/posts')}}">
+                <form  method="post" id='edit_post_form'  action="{{url('/posts')}}">
                     {{ csrf_field() }}
-                    @foreach($myPosts as $post)
+                    @foreach($my_posts as $post)
                         <input type="hidden" name="_method" value="PUT">
                         <input type="text" id="post_title" name="title" value="{{$post->title}}" style="width: 250px;" />
                         <textarea class="form-control" rows="4" name="longtext">{{$post->text}}</textarea>

@@ -1,4 +1,4 @@
-<div id="DeleteCategory" class="modal fade" role="dialog">
+<div id="Delete_Category" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <p>Remove a category <span id=delete_category></span> ?</p>
-                <form method="post" id='deleteForm' style='float: left;' action="{{url('/categories/')}}">
+                <form method="post" id='delete_form' style='float: left;' action="{{url('/categories/')}}">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" id='delete_click' value="Yes">

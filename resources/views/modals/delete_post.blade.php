@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <p>Remove a post <span id="delete_post"></span> ?</p>
-                <form method="post" id='deletePostForm' style='float: left;' action="{{url('/posts/')}}">
+                <form method="post" id='delete_post_form' style='float: left;' action="{{url('/posts/')}}">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" id='delete_click_post' value="Yes">

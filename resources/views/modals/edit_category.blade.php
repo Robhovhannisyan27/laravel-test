@@ -6,7 +6,7 @@
                 <h4 class="modal-title">Update Category</h4>
             </div>
             <div class="modal-body">
-                <form  id='editForm' method="post" action="{{url('/categories')}}">
+                <form  id='edit_form' method="post" action="{{url('/categories')}}">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="PUT">
                     <input type="text" id="category_title" name="category_title" placeholder="Enter category name" style="width: 250px;"  value=""/>

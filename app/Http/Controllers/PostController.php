@@ -27,18 +27,22 @@ class PostController extends Controller
 
     public function index()
     {
-        $myCategories=$this->category->where('user_id',Auth::id())->get();
+        $my_categories=$this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
         $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate('9');
-        return view('my-posts', ['category_post'=>$category_post , 'categories'=>$categories, 'myCategories'=>$myCategories]);
+        return view('my_posts', [
+            'category_post'=>$category_post, 
+            'categories'=>$categories, 
+            'my_categories'=>$my_categories
+            ]);
     }
 
-    public function errors(Request $request){
-        if($request->ajax()) {
-            return view('my-posts');
-        }
-        dd('ok');
-    }
+    // public function errors(Request $request){
+    //     if($request->ajax()) 
+    //     {
+    //         return view('my-posts');
+    //     }
+    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,29 +61,25 @@ class PostController extends Controller
         $inputs=$request->all();
         $inputs['user_id'] = Auth::id();
         unset($inputs['_token']);
-        if(strlen($inputs['longtext'])<20)
-        {
+
+        if(strlen($inputs['longtext'])<20) {
             $inputs['text']=$inputs['longtext'];
-        }
-        else{
+        } else {
             $inputs['text']=substr($inputs['longtext'],0,20).'...';
         }
-        if($request->hasFile('image')){   
+
+        if($request->hasFile('image')) {   
             $image = $request->file('image');
             $inputs['image'] = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('/image'), $inputs['image']);
-        }
-        else{
+        } else {
             $inputs['image']='no-image.png';
         }
         
         $post = $this->post->create($inputs);
-        if($post)
-        {
+        if($post) {
             return response()->json(['post' => $post], 200);
-        }
-        else
-        {
+        } else {
             return response()->json(['error' => 'Something went wrong!!!'], 400);
         }
     }
@@ -92,9 +92,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $myPosts=$this->post->where('user_id',Auth::id())->where('id',$id)->get();
+        $my_posts=$this->post->where('user_id',Auth::id())->where('id',$id)->get();
         $posts=$this->post->where('id',$id)->get();
-        return view('post',['posts'=>$posts, 'myPosts'=>$myPosts]);
+        return view('post',['posts'=>$posts, 'my_posts'=>$my_posts]);
     }
 
     /**
@@ -117,17 +117,15 @@ class PostController extends Controller
         $inputs = $request->all();
         unset($inputs['_token']);
         unset($inputs['_method']);
-        foreach($inputs as $key => $value){
-            if($value==null)
-            {
+        foreach($inputs as $key => $value) {
+            if($value==null) {
                 unset($inputs[$key]);
             }
         }
         
-        if($this->post->where('id', $id)->update($inputs)){
+        if($this->post->where('id', $id)->update($inputs)) {
              return redirect()->back()->with('success', 'Post changed');
-        }
-        else{
+        } else {
              return redirect()->back()->with('error', 'Error');
         } 
      

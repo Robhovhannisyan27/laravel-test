@@ -45,17 +45,17 @@
             </div> 
             
         @endif
-        @if(isset($myCategories))
+        @if(isset($my_categories))
             <div  style="margin-top: -3%; width: 50%; margin-left: 30%;">
                 <h2>My Categories</h2>
-                @foreach($myCategories as $category)
+                @foreach($my_categories as $category)
                     <div style="float: left;">
                         <div style="float: left;"><a style='text-decoration: none; width: 250px;' class="list-group-item" href="/categories/{{$category->id}}">{{ $category->category_title }}</a></div>
                         <div data-toggle="modal" data-target="#Edit" style="float: left; margin-left: 20px;" >
-                            <button type="button" class="editButton btn btn-success" data-id="{{$category->id}}" data-title="{{$category->category_title}}">Edit Category</button>
+                            <button type="button" class="edit_button btn btn-success" data-id="{{$category->id}}" data-title="{{$category->category_title}}">Edit Category</button>
                         </div>
-                        <div data-toggle="modal" data-target="#DeleteCategory" style="float: left; margin-left: 20px;">   
-                            <button type="button" class=" deleteButton btn btn-success" data-id="{{$category->id}}" data-title="{{$category->category_title}}">Delete Category</button>
+                        <div data-toggle="modal" data-target="#Delete_Category" style="float: left; margin-left: 20px;">   
+                            <button type="button" class=" delete_button btn btn-success" data-id="{{$category->id}}" data-title="{{$category->category_title}}">Delete Category</button>
                         </div> 
                     </div>   
                 @endforeach
@@ -71,10 +71,10 @@
                        
 
     </div>
-    @include('modals.deleteCategory')
-    @include('modals.addCategory')
-    @include('modals.editCategory')
-    @include('modals.addPost') 
+    @include('modals.delete_category')
+    @include('modals.add_category')
+    @include('modals.edit_category')
+    @include('modals.add_post') 
  @endsection
 
 
