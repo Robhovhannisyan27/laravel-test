@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Socialite;
+use App\SocialProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,5 +69,60 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+
+
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+   
+    public function handleProviderCallback()
+    {
+        
+
+
+        try {
+            $social_user = Socialite::driver('facebook')->user();
+        }
+        catch(\Exception $e) {
+            return redirect('/');    
+        }
+
+        $socialProvider=SocialProvider::where('provider_id', $social_user->getId())->first();
+        
+        if(!$socialProvider) {
+            $user = User::firstOrCreate(
+                ['email' => $social_user->getEmail()],
+                ['name' => $social_user->getName()]
+            );
+            $user->socialProviders()->create(
+                ['provider_id'=> $social_user->getId(), 'provider' => 'facebook']
+            );
+
+        } else {
+            $user = $socialProvider->user;
+
+
+
+        }
+
+        // $user=User::where('facebook_id', $social_user->getId())->first();
+        // if(!$user) {
+        //     User::create([
+        //         'facebook_id' => $social_user->getId(),
+        //         'name' => $social_user->getName(),
+        //         'email' => $social_user->getEmail()
+        //     ]);
+        // }
+
+        auth()->login($user);
+
+        return redirect()->to('/home');
+
+      //  return $social_user->getEmail();
     }
 }

@@ -93,28 +93,32 @@ $(document).ready(function(){
 		}
 	})
 	
-	$('.edit_button').click(function() {
+	$('.edit_button').click(function() 
+	{
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
 		var category= $('#edit_form').attr('action');
-		$('#category_title').attr('value',title);
-		$('#edit_click').click(function(){
+		$('#category_title').attr('value', title);
+		$('#edit_click').click(function()
+		{
 			category = category.concat('/');
 			id = category.concat(id);
-			$('#edit_form').attr('action',id);
+			$('#edit_form').attr('action', id);
 			
 		})
 	})
 
-	$('.delete_button').click(function(){
+	$('.delete_button').click(function()
+	{
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
 		var delete_category= $('#delete_form').attr('action');
 		$('#delete_category').html(title);
-		$('#delete_click').click(function(){
+		$('#delete_click').click(function()
+		{
 			delete_category = delete_category.concat('/');
 			id = delete_category.concat(id);
-			$('#delete_form').attr('action',id);
+			$('#delete_form').attr('action', id);
 			
 		})
 
@@ -133,7 +137,7 @@ $(document).ready(function(){
 		$('#delete_click_post').click(function(){
 			delete_post = delete_post.concat('/');
 			id = delete_post.concat(id);
-			$('#delete_post_form').attr('action',id);
+			$('#delete_post_form').attr('action', id);
 			
 		})
 
@@ -147,7 +151,7 @@ $(document).ready(function(){
 		$('#edit_post_click').click(function(){
 			post = post.concat('/');
 			id = post.concat(id);
-			$('#edit_post_form').attr('action',id);
+			$('#edit_post_form').attr('action', id);
 		})
 	})
 

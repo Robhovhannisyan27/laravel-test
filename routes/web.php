@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
 Route::resource('posts', 'PostController', ['except' => ['create', 'edit']]);
 
+Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');

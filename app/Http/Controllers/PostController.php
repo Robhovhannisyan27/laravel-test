@@ -78,7 +78,7 @@ class PostController extends Controller
         
         $post = $this->post->create($inputs);
         if($post) {
-            return response()->json(['post' => $post], 200);
+            return response()->json(['post' => $post, 'success' => 'fafa'], 200);
         } else {
             return response()->json(['error' => 'Something went wrong!!!'], 400);
         }
