@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Auth;
+use Mail;
 use Socialite;
 use App\SocialProvider;
 use App\Http\Controllers\Controller;
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/register/verify';
 
     /**
      * Create a new controller instance.
@@ -38,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except(['verify', 'confirm']);
     }
 
     /**
@@ -68,61 +70,40 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'confirm_token' => str_random(30)
         ]);
     }
 
+    protected function verify(){
+        if(Auth::user()->success == 0){
+            $token = Auth::user()->confirm_token;
+            $url = env('APP_URL', 'http://blog.dev').'/verify/'. $token;
+            $email = Auth::user()->email;
 
-
-
-    public function redirectToProvider()
-    {
-        return Socialite::driver('facebook')->redirect();
+            Mail::send('auth.confirmEmail', ['url' => $url], function($message) use ($email){
+                $message->from('hovhannisyanrob27@gmail.com', 'blog');
+                $message->to($email);
+                $message->subject('Please confirm your email address!!!');
+            });
+            return view('auth.verify');
+        }
+        else {
+            return redirect('home');
+        }
     }
 
-   
-    public function handleProviderCallback()
-    {
+
+    protected function confirm($token){
+        $user = User::where('confirm_token', $token)->first();
         
-
-
-        try {
-            $social_user = Socialite::driver('facebook')->user();
+        if(!is_null($user)){
+            $user->success = 1;
+            $user->confirm_token = '';
+            $user->save();
+            return redirect('login')->with('status', 'Your activation is completed');
         }
-        catch(\Exception $e) {
-            return redirect('/');    
-        }
+        return redirect('login')->with('status', 'Something went wrong');
 
-        $socialProvider=SocialProvider::where('provider_id', $social_user->getId())->first();
-        
-        if(!$socialProvider) {
-            $user = User::firstOrCreate(
-                ['email' => $social_user->getEmail()],
-                ['name' => $social_user->getName()]
-            );
-            $user->socialProviders()->create(
-                ['provider_id'=> $social_user->getId(), 'provider' => 'facebook']
-            );
-
-        } else {
-            $user = $socialProvider->user;
-
-
-
-        }
-
-        // $user=User::where('facebook_id', $social_user->getId())->first();
-        // if(!$user) {
-        //     User::create([
-        //         'facebook_id' => $social_user->getId(),
-        //         'name' => $social_user->getName(),
-        //         'email' => $social_user->getEmail()
-        //     ]);
-        // }
-
-        auth()->login($user);
-
-        return redirect()->to('/home');
-
-      //  return $social_user->getEmail();
     }
+
 }

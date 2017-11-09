@@ -18,6 +18,7 @@ class User extends Authenticatable
         'name', 
         'email',
         'password', 
+        'confirm_token',
         'facebook_id'
     ];
 
