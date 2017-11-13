@@ -9,11 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    
     protected $fillable = [
         'name', 
         'email',
@@ -22,16 +18,13 @@ class User extends Authenticatable
         'facebook_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    function socialProviders(){
+    public function socialProviders()
+    {
         return $this->hasMany(SocialProvider::class);
     }
 }

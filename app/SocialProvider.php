@@ -14,7 +14,7 @@ class SocialProvider extends Model
 
 
 
-	function user()
+	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}

@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSocialProvidersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('social_providers', function (Blueprint $table) {
@@ -22,11 +18,7 @@ class CreateSocialProvidersTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('social_providers');

@@ -18,10 +18,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+Route::get('/register/verify', 'Auth\RegisterController@verify');
+Route::get('/register/verify/{token}', 'Auth\RegisterController@confirm');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
-Route::resource('posts', 'PostController', ['except' => ['create', 'edit']]);
 
-Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
+Route::resource('categories', 'CategoriesController', ['except' => ['create', 'edit']]);
+Route::resource('posts', 'PostsController', ['except' => ['create', 'edit']]);
+
+// Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
+// Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
+
+Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebookProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookProviderCallback');
