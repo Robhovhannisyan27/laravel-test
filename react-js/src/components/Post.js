@@ -8,46 +8,40 @@ import DeletePost from './DeletePost';
 
 
 class Post extends Component {
-  	constructor(props){
-      super(props);
-      this.state = {
-        posts: [],
-        post_id: this.props.match.params.post_id,
-        post: '',
-        image: '',
-        title: '',
-        text: '',
-        user_id: ''
-      }
-      this.editPost = this.editPost.bind(this);
+	constructor(props){
+    super(props);
+    this.state = {
+      posts: [],
+      post_id: this.props.match.params.post_id,
+      post: '',
+      image: '',
+      title: '',
+      text: '',
+      user_id: ''
     }
-    componentWillReceiveProps(nextProps){
-    	console.log(nextProps.match.params.post_id)
-      if(nextProps.match.params.post_id !== this.props.match.params.post_id)
-      {
-        this.state.post_id =  nextProps.match.params.post_id;
-      }
-      this.componentWillMount();
+    this.editPost = this.editPost.bind(this);
+  }
+  componentWillReceiveProps(nextProps){
+  	console.log(nextProps.match.params.post_id)
+    if(nextProps.match.params.post_id !== this.props.match.params.post_id)
+    {
+      this.state.post_id =  nextProps.match.params.post_id;
     }
+    this.componentWillMount();
+  }
 
-    componentWillMount(){
-      	axios.get('/api/posts/' + this.state.post_id).then((response) => {
-        	var data = response.data.post[0];
-        	this.setState({ image: data.image, title: data.title, text: data.longtext, user_id: data.user_id})
-	        // this.setState({ post: response.data[0].data})
-	        // console.log(response);
-	         
-        	}).catch((err)=>{
-
-      	})
-    }
-    editPost(title,text,image){
-    	console.log(title);
-    	console.log(text);
-    	console.log(image);
-    	this.setState({'title': title, 'text': text, 'image': image});
-    	this.render();
-    }
+  componentWillMount(){
+  	axios.get('/api/posts/' + this.state.post_id).then((response) => {
+    	var data = response.data.post[0];
+    	this.setState({ image: data.image, title: data.title, text: data.longtext, user_id: data.user_id});
+    	}).catch((err)=>{
+        console.log(err);
+  	})
+  }
+  editPost(title,text,image){
+  	this.setState({'title': title, 'text': text, 'image': image});
+  	this.render();
+  }
     render() {
     	var myPosts;
     	if(this.state.user_id == sessionStorage.getItem('user_id')){
