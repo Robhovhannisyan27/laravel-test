@@ -53,7 +53,7 @@ class App extends Component {
 		if(sessionStorage.getItem('user_id')){
 			userName = <AllCategories addCategory= {this.state.category} editCategory={this.state.editCategoryName} deleteCategory={this.state.deleteCategory} allCategories={this.allCategories} />;
 		}
-    return (
+    return(
     	<div id="app">
         <nav className="navbar navbar-default navbar-static-top">
           <div className="container">
