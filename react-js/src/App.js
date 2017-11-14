@@ -75,7 +75,7 @@ class App extends Component {
         </nav>
   		<div>
         {userName}
-    		<Route exact path="/login"  render={() => <Login userLogin={this.userLogin} /> }/>
+  		  <Route exact path="/login"  render={() => <Login userLogin={this.userLogin} /> }/>
     		<Route path="/register" render={() => <Register userRegister={this.userRegister} /> } />
     		<Route path='/my-categories' render={()=> <MyCategories addCategory={this.addCategory} changeCategoryName={this.changeCategoryName} deleteCategory={this.deleteCategory} />} />
     		<Route path='/my-posts' render={()=> <MyPosts />} />
