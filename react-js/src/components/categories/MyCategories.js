@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
-import '../css/Menu.css';
+import './categories.css';
 import AddCategories from './AddCategories';
 import EditCategories from './EditCategories';
 import DeleteCategories from './DeleteCategories';
-import AddPost from './AddPost';
-
+import AddPost from '../posts/AddPost';
+import PropTypes from 'prop-types';
 
 class MyCategories extends Component {
 	constructor(props){
@@ -19,12 +19,12 @@ class MyCategories extends Component {
     this.changeCategoryName = this.changeCategoryName.bind(this);
   }
   componentWillMount(){
-    axios.get('/api/myCategories/' + sessionStorage.getItem('user_id')).then((response) => {
+    axios.get('/api/user/' + sessionStorage.getItem('user_id') + '/categories').then((response) => {
       let categories = Object.values(response.data)[0];
        this.setState({ categories: categories})
        
       }).catch((err)=>{
-        console.log(err);
+        
     })
   }
   addCategory(category){
@@ -39,7 +39,6 @@ class MyCategories extends Component {
         val.category_title = category.category_title;
       }
     })
-    console.log(this.state.categories); 
     this.componentWillMount();
     this.render();
     this.props.changeCategoryName(category);
@@ -55,8 +54,8 @@ class MyCategories extends Component {
     this.props.deleteCategory(category);
   }
   render() {
-    var changeCategoryName = this.changeCategoryName;
-    var deleteCategory = this.deleteCategory;
+    const changeCategoryName = this.changeCategoryName;
+    const deleteCategory = this.deleteCategory;
     return (
       <div>
         <div className="myCategories">
@@ -65,7 +64,6 @@ class MyCategories extends Component {
               <div className="comp_div">
               {
                 this.state.categories.map(function(val, index){ 
-                  console.log(val, index)
                     return (
                       <div key={index} className='div'>
                         <div className='cat_name'><Link to={'/categories/'+val.id}  className="list-group-item" >{val.category_title}</Link></div>
@@ -85,5 +83,11 @@ class MyCategories extends Component {
     );
 	}
 }
+
+MyCategories.propTypes = {
+  addCategory: PropTypes.func,
+  changeCategoryName: PropTypes.func,
+  deleteCategory: PropTypes.func
+};
 
 export default MyCategories;

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
-import Home from './Home';
-import '../css/Menu.css';
+import Home from '../menu/Home';
+import './auth.css';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   constructor(props){
@@ -35,7 +36,6 @@ class Login extends Component {
       this.setState({ id:response.data.user.id, name:sessionStorage.getItem('name'), error: ''});
       sessionStorage.setItem('user_id', this.state.id);
       sessionStorage.setItem('name', response.data.user.name);
-      console.log(sessionStorage.getItem('user_id'));
       this.props.userLogin(this.state.id);
     }).catch((err) => {
       this.setState({ error: 'Incorect Login or Password'});
@@ -116,6 +116,10 @@ class Login extends Component {
   }
   
 }
+
+Login.propTypes = {
+  userLogin: PropTypes.func,
+};
 
 export default Login;
 

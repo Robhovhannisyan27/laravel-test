@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router';
+import PropTypes from 'prop-types';
 
 class Register extends Component {
 	constructor(props){
@@ -26,7 +27,6 @@ class Register extends Component {
     	this.setState({ id:response.data.user.id, name:sessionStorage.getItem('name'), error: ''});
         sessionStorage.setItem('user_id', this.state.id);
         sessionStorage.setItem('name', response.data.user.name);
-        console.log(sessionStorage.getItem('user_id'));
         this.props.userRegister(this.state.name);
     }).catch((err) => {
         this.setState({error: Object.values(err.response.data.errors)[0]});
@@ -112,5 +112,9 @@ class Register extends Component {
   );
   }
 }
+
+Register.propTypes = {
+  userRegister: PropTypes.func,
+};
 
 export default Register;

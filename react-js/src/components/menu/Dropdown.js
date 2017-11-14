@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {HashRouter, Route, Link} from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import axios from 'axios';
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 
 
 class Drowdown extends Component {
   logOut(){
-    console.log(sessionStorage);
     sessionStorage.clear();
   }
   render() {

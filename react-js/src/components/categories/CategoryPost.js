@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
-import '../css/Menu.css';
-import AddPost from './AddPost';
+import './categories.css';
+import AddPost from '../posts/AddPost';
 
 class CategoryPost extends Component {
 	constructor(props){
@@ -11,7 +11,7 @@ class CategoryPost extends Component {
       category_id: this.props.match.params.id,
       posts: []
     }
-    this.addPostCategory = this.addPostCategory.bind(this);
+    this.addPost = this.addPost.bind(this);
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.match.params.id !== this.props.match.params.id)
@@ -20,19 +20,16 @@ class CategoryPost extends Component {
     }
     this.componentWillMount();
   }
-  addPostCategory(post){
+  addPost(post){
     this.state.posts.unshift(post);
     this.setState({ posts: this.state.posts});
-    console.log(this.state.posts);
-    console.log(12414);
     this.render();
   }
   componentWillMount(){
-    axios.get('/api/categoryPosts/' + this.state.category_id).then((response) => {
+    axios.get('/api/categories/' + this.state.category_id + '/posts').then((response) => {
       this.setState({ posts: response.data[0].data})
-      console.log(response);  
       }).catch((err)=>{
-        console.log(err);
+        
     })
   }
 
@@ -56,7 +53,7 @@ class CategoryPost extends Component {
           })
         }
         </div>
-        <AddPost addPostCategory={this.addPostCategory} />
+        <AddPost addPost={this.addPost} />
       </div>  
     );
 	}

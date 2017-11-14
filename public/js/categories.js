@@ -97,30 +97,18 @@ $(document).ready(function(){
 	{
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
-		var category= $('#edit_form').attr('action');
+		var action = $('#edit_form').attr('action');
+		$('#edit_form').attr('action', action + '/' + id);
 		$('#category_title').attr('value', title);
-		$('#edit_click').click(function()
-		{
-			category = category.concat('/');
-			id = category.concat(id);
-			$('#edit_form').attr('action', id);
-			
-		})
 	})
 
 	$('.delete_button').click(function()
 	{
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
-		var delete_category= $('#delete_form').attr('action');
+		var action = $('#delete_form').attr('action');
+		$('#delete_form').attr('action', action + '/' + id);
 		$('#delete_category').html(title);
-		$('#delete_click').click(function()
-		{
-			delete_category = delete_category.concat('/');
-			id = delete_category.concat(id);
-			$('#delete_form').attr('action', id);
-			
-		})
 
 	})
 
@@ -132,27 +120,17 @@ $(document).ready(function(){
 	$('.delete_post_button').click(function(){
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
-		var delete_post= $('#delete_post_form').attr('action');
-		//$('#delete_post').html(title);
-		$('#delete_click_post').click(function(){
-			delete_post = delete_post.concat('/');
-			id = delete_post.concat(id);
-			$('#delete_post_form').attr('action', id);
-			
-		})
+		var action = $('#delete_post_form').attr('action');
+		$('#delete_post_form').attr('action', action + '/' + id);
 
 	})
 
 	$('.edit_post_button').click(function() {
 		var id = $(this).attr('data-id');
 		var title = $(this).attr('data-title');
-		var post= $('#edit_post_form').attr('action');
+		var action = $('#edit_post_form').attr('action');
+		$('#edit_form').attr('action', action + '/' + id);
 		//$('#category_title').attr('value',title);
-		$('#edit_post_click').click(function(){
-			post = post.concat('/');
-			id = post.concat(id);
-			$('#edit_post_form').attr('action', id);
-		})
 	})
 
 });

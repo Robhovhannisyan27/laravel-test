@@ -61,7 +61,7 @@ class PostsController extends Controller
                 unset($inputs[$key]);
             }
         }
-        dd($inputs);
+        
         if($this->post->where('id', $id)->update($inputs)) {
              return redirect()->back()->with('success', 'Post changed');
         } 

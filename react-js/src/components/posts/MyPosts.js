@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from 'axios'
-import '../css/Menu.css';
+import './posts.css';
 import AddPost from './AddPost';
 
 
@@ -14,11 +14,9 @@ class MyPosts extends Component {
       this.addPost = this.addPost.bind(this);
     }
     componentWillMount(){
-      axios.get('/api/myPosts/' + sessionStorage.getItem('user_id')).then((response) => {
+      axios.get('/api/user/' + sessionStorage.getItem('user_id') + '/posts').then((response) => {
         let posts = Object.values(response.data[1].data);
-         this.setState({ posts: posts})
-        console.log(response.data[1].data);
-         
+        this.setState({ posts: posts});
         }).catch((err)=>{
 
       })
@@ -26,7 +24,6 @@ class MyPosts extends Component {
     addPost(post){
       this.state.posts.unshift(post);
       this.setState({ posts: this.state.posts});
-      console.log(this.state.posts);
       this.render();
     }
     render() {

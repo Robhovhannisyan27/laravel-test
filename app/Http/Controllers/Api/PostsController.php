@@ -9,7 +9,6 @@ use Illuminate\Validation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -24,10 +23,8 @@ class PostsController extends Controller
 
     public function index($id)
     {
-        // $my_categories=$this->category->where('user_id',$id)->get();
-        // $categories = $this->category->get();
-        $post = $this->post->where('user_id',$id)->orderby('id','desc')->Paginate('9');
-        return response()->json(['posts', $post],200);
+        $my_posts = $this->post->where('user_id',$id)->orderby('id','desc')->Paginate('9');
+        return response()->json(['posts', $my_posts],200);
     }
 
     
@@ -35,26 +32,24 @@ class PostsController extends Controller
     {
         $inputs = $request->inputs();
         $inputs['user_id'] = $id;
-        $post = $this->post->create($inputs);
-        if($post) {
-            return response()->json(['post' => $post, 'success' => 'fafa'], 200);
-        } else {
-            return response()->json(['error' => 'Something went wrong!!!'], 400);
-        }
+        $create_post = $this->post->create($inputs);
+        if($create_post) {
+            return response()->json(['post' => $create_post, 'success' => 'fafa'], 201);
+        } 
+        return response()->json(['error' => 'Something went wrong!!!'], 400);
     }
 
     
-    public function show($id)
+    public function show($user_id, $id)
     {
-        $posts=$this->post->where('id',$id)->get();
-        //dd($posts);
-        return response()->json(['post' => $posts], 200);
+        $my_posts=$this->post->where('id',$id)->get();
+        return response()->json(['post' => $my_posts], 200);
     }
 
     
-    public function update($id, Request $request)
+    public function update(Request $request, $user_id, $id)
     {
-        //dd($id, $request->all());
+        
         $inputs = $request->except(['_token', '_method']);
         if(strlen($inputs['longtext'])<20) {
             $inputs['text']=$inputs['longtext'];
@@ -70,22 +65,22 @@ class PostsController extends Controller
             }
         }
 
-        $post = $this->post->where('id', $id)->update($inputs);
+        $update_post = $this->post->where('id', $id)->where('user_id',$user_id)->update($inputs);
 
-        if($post) {
-            $updatePost = $this->post->where('id', $id)->get();
+        if($update_post) {
+            $get_post = $this->post->where('id', $id)->get();
             
-            return response()->json([$updatePost], 200);
+            return response()->json([$get_post], 200);
         } 
-        return response()->json(['error'], 403);
+        return response()->json(['error'], 400);
         
      
     }
 
     
-    public function destroy($id)
+    public function destroy($user_id, $id)
     {
-        $this->post->where('id',$id)->delete();
+        $this->post->where('id',$id)->where('user_id', $user_id)->delete();
         return response()->json(['post delete'], 200);
     }
 }

@@ -1,0 +1,62 @@
+.postsList{
+  margin-left: 90px;
+}
+.post_form{
+  margin-left: 20%; 
+  margin-top: 30px;
+  position: relative;
+  height: 300px;
+}
+.modal_div{
+  float:right;
+  margin-right: 20px;
+  z-index: 1111;
+}
+.posts{
+  margin-left: 5%;
+}
+.post{
+  border:1px solid silver;
+  height: auto;
+  margin-left: 20px;
+  border-radius: 6px;
+  margin-top: 20px;
+  height: 250px;
+}
+.post_image img{
+  margin-top: 15px;
+  width: 100%;
+  position: relative;
+  height: 150px;
+}
+
+.large_post_image img{
+  height: 400px;
+}
+
+#edit_post_form textarea{
+  margin-top: 20px;
+  width: 80%;
+}
+#edit_post_form input{
+  margin-top: 20px;
+}
+.image{
+  width: 80%;
+}
+.paginate{
+  position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#error_title, #error_text,#error_image, #error_category{
+  
+  margin-left: 34%;
+  color:red;
+  display: none;
+  height: 20px;
+}
+.deletePost{
+  float:right;
+  margin-right: 20px;
+}

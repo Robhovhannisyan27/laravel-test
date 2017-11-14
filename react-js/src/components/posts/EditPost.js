@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from 'axios'
-import '../css/Menu.css';
+import './posts.css';
 import AddPost from './AddPost';
-
+import EditPostButton from '../modals/EditPostButton';
+import PropTypes from 'prop-types';
 
 class EditPost extends Component {
 	constructor(props){
     super(props);
     this.state = {
-      posts: [],
       image: '',
       title: '',
       text: ''
@@ -26,25 +26,22 @@ class EditPost extends Component {
     this.setState({'text': e.target.value});
   }
   handleClick(){
-    console.log(this.props.post_id)
     let data = new FormData();
     data.append('image', this.state.image.name);
     data.append('title', this.state.title);
     data.append('longtext', this.state.text);
     data.append('_method', 'PUT');
-    axios.post('/api/editPost/' + this.props.post_id, data).then((response) => {
+    axios.post('/api/user/' + sessionStorage.getItem('user_id') + '/posts/' + this.props.post_id, data).then((response) => {
       let data = response.data[0][0];
-      console.log(response.data[0][0]);
       this.setState({title: data.title, text: data.text, image: data.image});
       this.props.editPost(data.title,data.text,data.image);
       }).catch((err)=>{
-        console.log(err);
+        
     })
   }
     
   onFileChange(event) {
     this.setState({image: event.target.files[0]});
-    console.log(this.state.image)
   }
    
   
@@ -55,27 +52,22 @@ class EditPost extends Component {
           <button type="button" className="edit_post_button btn btn-success">Edit Post</button>
         </div>
 
-        <div id="edit_post" className="modal fade" role="dialog">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">Update Post</h4>
-              </div>
-              <div className="modal-body">
-                <input type="text" id="post_title" onChange={this.changeTitle} value={this.state.title} name="title" style={{width: 250 + 'px'}} />
-                <textarea className="form-control" onChange={this.changeText} value={this.state.text} rows="4" name="longtext"></textarea>
-                <input name='image' type="file" onChange={this.onFileChange} className="image form-control" />
-                <input type="submit" value="Update"  onClick={this.handleClick}  id="edit_post_click" data-dismiss="modal" />
-                <button type="button" style={{margiLeft: 5 + 'px'}} data-dismiss="modal">Cancel</button>
-              </div>           
-            </div>
-          </div>
-        </div>
-        
+        <EditPostButton 
+          changeTitle={this.changeTitle}
+          title={this.state.title}
+          changeText={this.changeText}
+          text={this.state.text}
+          onFileChange={this.onFileChange}
+          handleClick={this.handleClick}
+        />
       </div>  
     );
 	}
 }
+
+EditPost.propTypes = {
+  post_id: PropTypes.string,
+  editPost: PropTypes.func,
+};
 
 export default EditPost;

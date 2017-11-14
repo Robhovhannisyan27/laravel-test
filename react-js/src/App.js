@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import Menu from './components/Menu';
-import Login from './components/Login';
-import Register from './components/Register';
-import AllCategories from './components/AllCategories';
-import MyCategories from './components/MyCategories';
-import AddCategories from './components/AddCategories';
-import MyPosts from './components/MyPosts';
-import CategoryPost from './components/CategoryPost';
-import Post from './components/Post';
+import Menu from './components/menu/Menu';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Categories from './components/categories/Categories';
+import MyCategories from './components/categories/MyCategories';
+import AddCategories from './components/categories/AddCategories';
+import MyPosts from './components/posts/MyPosts';
+import CategoryPost from './components/categories/CategoryPost';
+import Post from './components/posts/Post';
 
 
 class App extends Component {
@@ -46,12 +46,20 @@ class App extends Component {
   	this.setState({ deleteCategory: category});
   }
   allCategories(allCategories){
-  	this.setState({ 'allCategories': allCategories });
+  	this.setState({ allCategories });
   }
 	render() {
-		var userName;
+		let userName;
 		if(sessionStorage.getItem('user_id')){
-			userName = <AllCategories addCategory= {this.state.category} editCategory={this.state.editCategoryName} deleteCategory={this.state.deleteCategory} allCategories={this.allCategories} />;
+			userName = (
+          <Categories 
+            addCategory= {this.state.category} 
+            editCategory={this.state.editCategoryName} 
+            deleteCategory={this.state.deleteCategory} 
+            allCategories={this.allCategories} 
+          >
+          </Categories>
+        );
 		}
     return(
     	<div id="app">

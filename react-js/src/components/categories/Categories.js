@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
-import '../css/Menu.css';
+import './categories.css';
 import AddCategories from './AddCategories';
+import PropTypes from 'prop-types';
 
-class AllCategories extends Component {
+class Categories extends Component {
 	constructor(props){
     super(props);
     this.state = {
@@ -18,7 +19,6 @@ class AllCategories extends Component {
       this.state.categories.push(nextProps.addCategory);
     }
     if(nextProps.editCategory !== this.props.editCategory){
-      console.log(1);
       this.state.categories.map((val,index) => {
         if(val.id == nextProps.editCategory.id){
           val.category_title = nextProps.editCategory.category_title;
@@ -26,7 +26,6 @@ class AllCategories extends Component {
       }) 
     }
     if(nextProps.deleteCategory !== this.props.deleteCategory){
-      console.log(2);
       this.state.categories.map((val,index) => {
         if(val.id == nextProps.deleteCategory){
           this.state.categories.splice(index,1);
@@ -38,7 +37,7 @@ class AllCategories extends Component {
     axios.get('/api/categories').then((response) => {
         this.setState({ categories: Object.values(response.data)[0]});
       }).catch((err)=>{
-        console.log(err);
+        
     }) 
   }
   handleClick(){
@@ -46,7 +45,7 @@ class AllCategories extends Component {
   }
     
   render() {
-    var handleClick = this.handleClick;
+    const handleClick = this.handleClick;
     return (
         <div  className="col-sm-2">
           <div className='categories'>
@@ -64,4 +63,8 @@ class AllCategories extends Component {
 	}
 }
 
-export default AllCategories;
+Categories.propTypes = {
+  allCategories: PropTypes.func,
+};
+
+export default Categories;
