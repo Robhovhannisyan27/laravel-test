@@ -11,9 +11,6 @@ class Links extends Component {
       <div>
         <ul className="nav navbar-nav navbar-right">
           <li>
-            <Link to="/login/facebook">Sign in with Facebook</Link>
-          </li>
-          <li>
             <Link to="/login">Login</Link>
           </li>
           <li>
