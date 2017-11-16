@@ -8,6 +8,7 @@ use App\Category;
 use Illuminate\Validation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 use App\Http\Requests\PostRequest;
 
 class PostsController extends Controller
@@ -15,23 +16,25 @@ class PostsController extends Controller
     
     public function __construct(Post $post, Category $category)
     {
+        $this->middleware('auth');
         $this->post = $post;
         $this->category = $category;
     }
 
 
 
-    public function index($id)
+    public function index()
     {
-        $my_posts = $this->post->where('user_id',$id)->orderby('id','desc')->Paginate('9');
+        // dd(Auth::user());
+        $my_posts = $this->post->where('user_id',Auth::user()->id)->orderby('id','desc')->Paginate(9);
         return response()->json(['posts', $my_posts],200);
     }
 
     
-    public function store(PostRequest $request, $id)
+    public function store(PostRequest $request)
     {
         $inputs = $request->inputs();
-        $inputs['user_id'] = $id;
+        $inputs['user_id'] = Auth::user()->id;
         $create_post = $this->post->create($inputs);
         if($create_post) {
             return response()->json(['post' => $create_post, 'success' => 'fafa'], 201);
@@ -40,14 +43,14 @@ class PostsController extends Controller
     }
 
     
-    public function show($user_id, $id)
+    public function show($id)
     {
         $my_posts=$this->post->where('id',$id)->get();
         return response()->json(['post' => $my_posts], 200);
     }
 
     
-    public function update(Request $request, $user_id, $id)
+    public function update(Request $request, $id)
     {
         
         $inputs = $request->except(['_token', '_method']);
@@ -65,7 +68,7 @@ class PostsController extends Controller
             }
         }
 
-        $update_post = $this->post->where('id', $id)->where('user_id',$user_id)->update($inputs);
+        $update_post = $this->post->where('id', $id)->where('user_id',Auth::user()->id)->update($inputs);
 
         if($update_post) {
             $get_post = $this->post->where('id', $id)->get();
@@ -78,9 +81,9 @@ class PostsController extends Controller
     }
 
     
-    public function destroy($user_id, $id)
+    public function destroy($id)
     {
-        $this->post->where('id',$id)->where('user_id', $user_id)->delete();
+        $this->post->where('id',$id)->where('user_id',Auth::user()->id)->delete();
         return response()->json(['post delete'], 200);
     }
 }

@@ -23,7 +23,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        $my_categories=$this->category->where('user_id',Auth::id())->get();
+        $my_categories = $this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
         $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate('9');
         return view('my_posts', [
@@ -39,16 +39,15 @@ class PostsController extends Controller
         $post = $this->post->create($request->inputs());
         if($post) {
             return response()->json(['post' => $post, 'success' => 'fafa'], 200);
-        } else {
-            return response()->json(['error' => 'Something went wrong!!!'], 400);
         }
+        return response()->json(['error' => 'Something went wrong!!!'], 400);
     }
 
     
     public function show($id)
     {
-        $my_posts=$this->post->where('user_id',Auth::id())->where('id',$id)->get();
-        $posts=$this->post->where('id',$id)->get();
+        $my_posts = $this->post->where('user_id',Auth::id())->where('id',$id)->get();
+        $posts = $this->post->where('id',$id)->get();
         return view('post',['posts'=>$posts, 'my_posts'=>$my_posts]);
     }
 
@@ -57,7 +56,7 @@ class PostsController extends Controller
     {
         $inputs = $request->except(['_token', '_method']);
         foreach($inputs as $key => $value) {
-            if($value==null) {
+            if($value == null) {
                 unset($inputs[$key]);
             }
         }

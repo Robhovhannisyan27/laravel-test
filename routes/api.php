@@ -24,17 +24,17 @@ Route::get('logout', 'AuthController@logout');
 
 
 Route::get('categories', 'CategoriesController@index');
-Route::get('user/{user_id}/categories', 'CategoriesController@myCategories');
-Route::post('user/{user_id}/categories', 'CategoriesController@store');
-Route::put('user/{user_id}/categories/{id}', 'CategoriesController@update');
-Route::delete('user/{user_id}/categories/{id}', 'CategoriesController@destroy');
+Route::get('me/categories', 'CategoriesController@myCategories');
+Route::post('me/categories', 'CategoriesController@store');
+Route::put('me/categories/{id}', 'CategoriesController@update');
+Route::delete('me/categories/{id}', 'CategoriesController@destroy');
 Route::get('categories/{id}/posts', 'CategoriesController@show');
 
-Route::get('user/{user_id}/posts', 'PostsController@index');
-Route::post('user/{user_id}/posts', 'PostsController@store');
-Route::get('user/{user_id}/posts/{id}', 'PostsController@show');
-Route::put('user/{user_id}/posts/{id}', 'PostsController@update');
-Route::delete('user/{user_id}/posts/{id}', 'PostsController@destroy');
+Route::get('me/posts', 'PostsController@index');
+Route::post('me/posts', 'PostsController@store');
+Route::get('me/posts/{id}', 'PostsController@show');
+Route::put('me/posts/{id}', 'PostsController@update');
+Route::delete('me/posts/{id}', 'PostsController@destroy');
 
 
 

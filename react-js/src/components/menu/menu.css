@@ -1,39 +1,39 @@
 .menu{
-  border-bottom: 2px solid black;
+	border-bottom: 2px solid black;
 }
 .links{
-  float: right;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	float: right;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .logo{
-  float: left;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	float: left;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .links a, .logo a{
-  color: #636b6f;
-  padding: 0 25px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-decoration: none;
-  text-transform: uppercase;
+	color: #636b6f;
+	padding: 0 25px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .1rem;
+	text-decoration: none;
+	text-transform: uppercase;
 }
 
 .navbar-nav {
-  margin: 7px -15px;
+	margin: 7px -15px;
 }
 
 .navbar-nav > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  line-height: 22px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 22px;
 }
 
 #error{
-  color:red;
-  margin-left: 48%;
+	color:red;
+	margin-left: 48%;
 }
 
 

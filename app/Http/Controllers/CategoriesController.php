@@ -19,7 +19,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $my_categories=$this->category->where('user_id',Auth::id())->get();
+        $my_categories = $this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
         return view('my_category', ['my_categories' => $my_categories, 'categories' => $categories]);
     }
@@ -30,17 +30,16 @@ class CategoriesController extends Controller
     {
         if($this->category->create(['category_title'=>$request->input('category_title'), 'user_id'=>Auth::id()])) {
             return redirect()->back()->with('success', 'Category created!');
-        } else {
-            return redirect()->back()->with('error', 'Something went wrong!!!');
-        }
+        } 
+        return redirect()->back()->with('error', 'Something went wrong!!!');
     }
 
     
     public function show($id, Post $post)
     {
-        $my_categories=$this->category->where('user_id',Auth::id())->get();
+        $my_categories = $this->category->where('user_id',Auth::id())->get();
         $category = $this->category->find($id);
-        $category_posts=$post->where('category_id',$id)->orderby('id','desc')->Paginate('9');
+        $category_posts = $post->where('category_id',$id)->orderby('id','desc')->Paginate('9');
         $categories = $this->category->get();
         return view('category', [
             'category_posts' => $category_posts, 
@@ -62,9 +61,8 @@ class CategoriesController extends Controller
         }
         if($this->category->where('id', $id)->update($inputs)) {
              return redirect()->back()->with('success', 'Category name changed');
-        } else {
-             return redirect()->back()->with('error', 'Error');
-        }
+        } 
+        return redirect()->back()->with('error', 'Error');
     }
 
     

@@ -16,6 +16,7 @@ class HomeController extends Controller
     
     public function index(Category $category)
     {
+    	// dd(\Auth::user());
         $categories = $category->get();
         return view('home', ['categories' => $categories]);
     }

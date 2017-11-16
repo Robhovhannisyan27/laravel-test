@@ -11,22 +11,26 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $categories = Category::get();
         return response()->json(['categories' => $categories], 200);
     }
 
-    public function myCategories($id)
+    public function myCategories()
     {
-        $my_categories=Category::where('user_id',$id)->get();
+        $my_categories=Category::where('user_id',Auth::user()->id)->get();
         return response()->json(['MyCategories' => $my_categories], 200);
     }
     
     
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-    	$create_category = Category::create(['category_title'=>$request->get('category_title'), 'user_id'=>$id]);
+    	$create_category = Category::create(['category_title'=>$request->get('category_title'), 'user_id'=>Auth::user()->id]);
         if($create_category) {
             return response()->json(['category' => $create_category], 200);
         }
@@ -46,10 +50,10 @@ class CategoriesController extends Controller
 
     
     
-    public function update(Request $request,$user_id, $id)
+    public function update(Request $request, $id)
     {
         $category_title = $request->input('category_title');
-       	$update_category = Category::where('id',$id)->where('user_id',$user_id)->update(['category_title'=>$category_title]);
+       	$update_category = Category::where('id',$id)->where('user_id',Auth::user()->id)->update(['category_title'=>$category_title]);
        	$my_categories = Category::where('id', $id)->get();
         if($update_category) {
             return response()->json([$my_categories], 201);
@@ -59,9 +63,9 @@ class CategoriesController extends Controller
     }
 
     
-    public function destroy($user_id, $id)
+    public function destroy($id)
     {
-        Category::where('id',$id)->where('user_id',$user_id)->delete();
+        Category::where('id',$id)->where('user_id', Auth::user()->id)->delete();
         return response()->json(['success'], 200);
     }
 }

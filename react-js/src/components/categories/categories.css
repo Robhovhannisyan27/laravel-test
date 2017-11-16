@@ -1,46 +1,46 @@
 .categories{
-  top: 8%;
-  position: absolute;
-  left: 0px;
+	top: 8%;
+	position: absolute;
+	left: 0px;
 }
 .cat_div{
-  max-height: 680px; 
-  width: 250px; 
-  left: 5%;
+	max-height: 680px; 
+	width: 250px; 
+	left: 5%;
 }
 .comp_div{
-  float: left;
+	float: left;
 }
 .div{
-  float: left;
-  margin-top: 10px;
+	float: left;
+	margin-top: 10px;
 }
 .myCategories{
-  width: 50%;
-  float: left;
-  margin-left: 30%;
-  position: absolute;
+	width: 50%;
+	float: left;
+	margin-left: 30%;
+	position: absolute;
 }
 .addCategory{
-  float: right;
-  margin-right: 20px;
+	float: right;
+	margin-right: 20px;
 }
 .addCategoryName{
-  width: 250px;
+	width: 250px;
 }
 .cat_name{
-  float: left;
+	float: left;
 }
 .cat_name a{
-  text-decoration: none; width: 250px;
+	text-decoration: none; width: 250px;
 }
 .cat_edit{
-  float: left;
+	float: left;
 }
 .cat_delete{
-  float: left;
+	float: left;
 }
 .category_title span{
-  float: right;
-  opacity: 0.5;
+	float: right;
+	opacity: 0.5;
 }

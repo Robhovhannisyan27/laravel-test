@@ -12,13 +12,13 @@ use App\Http\Requests\RegisterRequest;
 class AuthController extends Controller
 {
 
-    public function __construct()
+    public function __construct(User $user)
     {
-        $this->middleware('guest')->except('logout');
+       $this->middleware('guest')->except('logout');
     }
 
     public function index(){
-        return response().json(['a' => 'a'], 200);
+        return response()->json(['a' => 'a'], 200);
     }
     public function login(Request $request, User $user)
     {
@@ -33,12 +33,12 @@ class AuthController extends Controller
         }
 
         $user = $user->where('email', $request->get('email'))->first();
-        Auth::login($user);
+        \Auth::login($user);
         return response()->json(['user' => Auth::user()],200);
     }
 
     public function logout(){
-        \Auth::logout();
+        Auth::logout();
         return response()->json(['message'=>"403"], 200);
     }
 
@@ -51,7 +51,6 @@ class AuthController extends Controller
             'password' => bcrypt($request->input('password')),
             'confirm_token' => md5(time().str_random(2)),
         ]);
-        //dd($user);
         Auth::login($user);
         return response()->json(['user'=>Auth::user()], 200);
     }
