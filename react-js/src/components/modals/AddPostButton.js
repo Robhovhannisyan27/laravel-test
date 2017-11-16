@@ -15,12 +15,12 @@ class AddPostButton extends Component {
                             <div className='post_form'>            
                                 <div className="form-group">
                                     <div className="col-sm-9">
-                                        <input type="text" className="form-control" id="title" name="title" placeholder="Title" onChange={this.props.changeTitle} value={this.props.title} />
+                                        <input type="text" className="form-control" id="title" name="title" placeholder="Title" onChange={this.props.getPostTitle} value={this.props.new_post_title} />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-sm-9">
-                                        <textarea className="form-control" id='text' rows="4" name="longtext" onChange={this.props.changeText} value={this.props.text} placeholder="Text" ></textarea>
+                                        <textarea className="form-control" id='text' rows="4" name="longtext" onChange={this.props.getPostText} value={this.props.new_post_text} placeholder="Text" ></textarea>
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -30,7 +30,7 @@ class AddPostButton extends Component {
                                 </div>
                                 <div className="form-group" style={{marginLeft: 10 + '%'}}>
                                     <label htmlFor='category' style={{float: 'left'}}>Choose a category</label>
-                                    <select name='category_id' id='select_category' onChange={this.props.changeSelect} value={this.props.select} className="col-sm-4" >
+                                    <select name='category_id' id='select_category' onChange={this.props.changeSelect} value={this.props.select_categories} className="col-sm-4" >
                                         <option></option>
                                         {
                                             this.props.categories.map((val, index) => { 
@@ -43,7 +43,7 @@ class AddPostButton extends Component {
                                 </div>
                                 <div className="form-group" style={{marginLeft: 70 + 'px'}}>
                                     <div className="col-sm-7 col-sm-offset-2">
-                                        <input className="submit" type="submit" id="test" value="Add Post"  onClick={this.props.handleClick} className="btn btn-primary" data-dismiss="modal" />
+                                        <input className="submit" type="submit" id="test" value="Add Post"  onClick={this.props.handleUpdate} className="btn btn-primary" data-dismiss="modal" />
                                     </div>
                                 </div>
                             </div>
@@ -59,14 +59,14 @@ class AddPostButton extends Component {
 }
 
 AddPostButton.propTypes = {
-    changeTitle: PropTypes.func,
-    title: PropTypes.string,
-    text: PropTypes.string,
-    select: PropTypes.number,
-    changeText: PropTypes.func,
+    getPostTitle: PropTypes.func,
+    new_post_title: PropTypes.string,
+    new_post_text: PropTypes.string,
+    select_categories: PropTypes.number,
+    getPostText: PropTypes.func,
     onFileChange: PropTypes.func,
     changeSelect: PropTypes.func,
-    handleClick: PropTypes.func,
+    handleUpdate: PropTypes.func,
     categories: PropTypes.array
 };
 

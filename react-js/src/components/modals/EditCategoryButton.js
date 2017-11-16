@@ -12,7 +12,7 @@ class EditCategoryButton extends Component {
                             <h4 className="modal-title">Update Category</h4>
                         </div>
                         <div className="modal-body" id={this.props.body_id}>   
-                            <input type="text"  id="category_title" onChange={this.props.changeName} value={this.props.name} name="category_title" placeholder="Enter category name" style={{width: 250+'px'}} />
+                            <input type="text"  id="category_title" onChange={this.props.getName} value={this.props.name} name="category_title" placeholder="Enter category name" style={{width: 250+'px'}} />
                             <input type="submit" onClick={this.props.handleUpdate} value="Update" id="edit_click" data-dismiss="modal" />
                             <button type="button" data-dismiss="modal">Cancel</button>
                         </div>
@@ -28,7 +28,7 @@ EditCategoryButton.propTypes = {
     body_id: PropTypes.number,
     name: PropTypes.string,
     handleClick: PropTypes.func,
-    changeName: PropTypes.func,
+    getName: PropTypes.func,
     handleUpdate: PropTypes.func,
 };
 

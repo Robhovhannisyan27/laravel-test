@@ -19,7 +19,7 @@ class Post extends Component {
             text: '',
             user_id: ''
         }
-        this.editPost = this.editPost.bind(this);
+        this.updatePost = this.updatePost.bind(this);
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.match.params.post_id !== this.props.match.params.post_id)
@@ -36,15 +36,15 @@ class Post extends Component {
                 
         })
     }
-    editPost(title,text,image){
+    updatePost(title,text,image){
         this.setState({'title': title, 'text': text, 'image': image});
     }
     render() {
-        let myPosts;
+        let logined_user_post;
         if(this.state.user_id == sessionStorage.getItem('user_id')){
-            myPosts = (
+            logined_user_post = (
                 <div>
-                    <EditPost post_id={this.state.post_id} editPost={this.editPost} />
+                    <EditPost post_id={this.state.post_id} updatePost={this.updatePost} />
                     <DeletePost post_id={this.state.post_id} />
                 </div>
             );
@@ -56,7 +56,7 @@ class Post extends Component {
                     <div className="large_post_title">{this.state.title}</div>
                     <div className="large_post_text"><p>{this.state.text}</p></div> 
                 </div>
-                {myPosts}
+                {logined_user_post}
             </div>  
         );
     }

@@ -11,30 +11,30 @@ class EditPost extends Component {
         super(props);
         this.state = {
             image: '',
-            title: '',
-            text: ''
+            updated_post_title: '',
+            updated_post_text: ''
         }
-        this.changeTitle = this.changeTitle.bind(this);
-        this.changeText = this.changeText.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.getUpdatedPostTitle = this.getUpdatedPostTitle.bind(this);
+        this.getUpdatedPostText = this.getUpdatedPostText.bind(this);
+        this.updatePost = this.updatePost.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
     }
-    changeTitle(e){
-        this.setState({'title': e.target.value});
+    getUpdatedPostTitle(e){
+        this.setState({'updated_post_title': e.target.value});
     }
-    changeText(e){
-        this.setState({'text': e.target.value});
+    getUpdatedPostText(e){
+        this.setState({'updated_post_text': e.target.value});
     }
-    handleClick(){
+    updatePost(){
         let data = new FormData();
         data.append('image', this.state.image.name);
-        data.append('title', this.state.title);
-        data.append('longtext', this.state.text);
+        data.append('title', this.state.updated_post_title);
+        data.append('longtext', this.state.updated_post_text);
         data.append('_method', 'PUT');
         axios.post('/api/me/posts/' + this.props.post_id, data).then((response) => {
             let data = response.data[0][0];
-            this.setState({title: data.title, text: data.text, image: data.image});
-            this.props.editPost(data.title,data.text,data.image);
+            this.setState({updated_post_title: data.title, updated_post_text: data.text, image: data.image});
+            this.props.updatePost(data.title,data.text,data.image);
             }).catch((err)=>{
                 
         })
@@ -53,12 +53,12 @@ class EditPost extends Component {
                 </div>
 
                 <EditPostButton 
-                    changeTitle={this.changeTitle}
-                    title={this.state.title}
-                    changeText={this.changeText}
-                    text={this.state.text}
+                    getUpdatedPostTitle={this.getUpdatedPostTitle}
+                    updated_post_title={this.state.updated_post_title}
+                    getUpdatedPostText={this.getUpdatedPostText}
+                    updated_post_text={this.state.updated_post_text}
                     onFileChange={this.onFileChange}
-                    handleClick={this.handleClick}
+                    updatePost={this.updatePost}
                 />
             </div>  
         );
@@ -67,7 +67,6 @@ class EditPost extends Component {
 
 EditPost.propTypes = {
     post_id: PropTypes.string,
-    editPost: PropTypes.func,
 };
 
 export default EditPost;

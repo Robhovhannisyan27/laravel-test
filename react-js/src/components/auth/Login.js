@@ -16,9 +16,9 @@ class Login extends Component {
             user: '',
             name: ''
         }
-        this.changeEmail = this.changeEmail.bind(this);
+        this.getEmail = this.getEmail.bind(this);
         this.doLogin = this.doLogin.bind(this);
-        this.changePassword = this.changePassword.bind(this);
+        this.getPassword = this.getPassword.bind(this);
     }
         
 
@@ -42,18 +42,18 @@ class Login extends Component {
         return false;  
     }
      
-    changeEmail(e){
+    getEmail(e){
         this.setState({email: e.target.value});
     }
 
-    changePassword(e){
+    getPassword(e){
         this.setState({password: e.target.value});
     }
 
     render() {
-        let main;
+        let redirect_to_home;
         if(this.state.id){
-            main = <Redirect to='/' />;
+            redirect_to_home = <Redirect to='/' />;
         }
     return (
         <div className="container">
@@ -69,7 +69,7 @@ class Login extends Component {
                                         <label htmlFor="email" className="col-md-4 control-label">E-Mail Address</label>
 
                                         <div className="col-md-6">
-                                            <input id="email" type="email" className="form-control" name="email" onChange={this.changeEmail} value={this.state.email} required autoFocus />
+                                            <input id="email" type="email" className="form-control" name="email" onChange={this.getEmail} value={this.state.email} required autoFocus />
                                         </div>
                                     </div>
 
@@ -77,7 +77,7 @@ class Login extends Component {
                                         <label htmlFor="password" className="col-md-4 control-label">Password</label>
 
                                         <div className="col-md-6">
-                                            <input id="password" type="password" className="form-control" onChange={this.changePassword} value={this.state.password} name="password" required />
+                                            <input id="password" type="password" className="form-control" onChange={this.getPassword} value={this.state.password} name="password" required />
                                         </div>
                                     </div>
 
@@ -96,7 +96,7 @@ class Login extends Component {
                                             <button type="submit" className="btn btn-primary" onClick={this.doLogin}>
                                                 Login
                                                 <div>
-                                                    {main}
+                                                    {redirect_to_home}
                                                 </div>    
                                             </button>
                                             <a className="btn btn-link" href="#">

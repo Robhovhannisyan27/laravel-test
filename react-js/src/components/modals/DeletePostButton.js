@@ -15,7 +15,7 @@ class DeletePostButton extends Component {
                             </div>
                             <div className="modal-body">
                                 <p>Remove a post <span id="delete_post"></span> ?</p>
-                                <input type="submit" id='delete_click_post' onClick={this.props.handleClick} data-dismiss="modal" value="Yes" />
+                                <input type="submit" id='delete_click_post' onClick={this.props.deletePost} data-dismiss="modal" value="Yes" />
                                 <button type="button" style={{ marginLeft: 15+'px'}} data-dismiss="modal">Cancel</button>
                             </div> 
                         </div>
@@ -27,7 +27,7 @@ class DeletePostButton extends Component {
 }
 
 DeletePostButton.propTypes = {
-    handleClick: PropTypes.func
+    deletePost: PropTypes.func
 };
 
 export default DeletePostButton;

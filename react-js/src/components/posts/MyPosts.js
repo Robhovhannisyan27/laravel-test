@@ -16,7 +16,7 @@ class MyPosts extends Component {
         componentWillMount(){
             axios.get('/api/me/posts').then((response) => {
                 let posts = Object.values(response.data[1].data);
-                this.setState({ posts: posts});
+                this.setState({ posts});
                 }).catch((err)=>{
 
             })
@@ -24,7 +24,7 @@ class MyPosts extends Component {
         addPost(post){
             let posts = this.state.posts;
             posts.unshift(post);
-            this.setState({ posts});
+            this.setState({posts});
         }
         render() {
             return (

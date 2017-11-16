@@ -21,14 +21,14 @@ class App extends Component {
             category: '',
             editCategoryName: '',
             deleteCategory: '',
-            allCategories: []
+            categories: []
         }
         this.userLogin = this.userLogin.bind(this);
         this.userRegister = this.userRegister.bind(this);
         this.addCategory = this.addCategory.bind(this);
         this.changeCategoryName = this.changeCategoryName.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
-        this.allCategories = this.allCategories.bind(this);
+        this.showCategories = this.showCategories.bind(this);
     }
     userLogin(user){
         this.setState({ name: user });
@@ -45,18 +45,18 @@ class App extends Component {
     deleteCategory(category){
         this.setState({ deleteCategory: category});
     }
-    allCategories(allCategories){
-        this.setState({ allCategories });
+    showCategories(categories){
+        this.setState({ categories });
     }
     render() {
-        let userName;
+        let categories;
         if(sessionStorage.getItem('user_id')){
-            userName = (
+            categories = (
                 <Categories 
                     addCategory= {this.state.category} 
                     editCategory={this.state.editCategoryName} 
                     deleteCategory={this.state.deleteCategory} 
-                    allCategories={this.allCategories} 
+                    showCategories={this.showCategories} 
                 >
                 </Categories>
             );
@@ -74,13 +74,13 @@ class App extends Component {
                     </div>
                 </nav>
             <div>
-                {userName}
+                {categories}
                 <Route exact path="/login"  render={() => <Login userLogin={this.userLogin} /> }/>
                 <Route path="/register" render={() => <Register userRegister={this.userRegister} /> } />
-                <Route path='/my-categories' render={()=> <MyCategories addCategory={this.addCategory} changeCategoryName={this.changeCategoryName} deleteCategory={this.deleteCategory} />} />
-                <Route path='/my-posts' render={()=> <MyPosts />} />
-                <Route path={'/categories/:id'} component={CategoryPost} />
-                <Route path={'/posts/:post_id'} component={Post} />
+                <Route path='/my-categories' render={() => <MyCategories addCategory={this.addCategory} changeCategoryName={this.changeCategoryName} deleteCategory={this.deleteCategory} />} />
+                <Route path='/my-posts' render={() => <MyPosts />} />
+                <Route path={'/categories/:id'} component = {CategoryPost} />
+                <Route path={'/posts/:post_id'} component = {Post} />
             </div>
         </div>
         );

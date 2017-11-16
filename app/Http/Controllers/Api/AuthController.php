@@ -17,9 +17,6 @@ class AuthController extends Controller
        $this->middleware('guest')->except('logout');
     }
 
-    public function index(){
-        return response()->json(['a' => 'a'], 200);
-    }
     public function login(Request $request, User $user)
     {
         $this->validate($request, [
@@ -29,7 +26,7 @@ class AuthController extends Controller
         
         $inputs = ['email' => $request->get('email'), 'password' => $request->get('password')];
         if(!Auth::attempt($inputs, $request->has('remember'))){
-            return response()->json(['message'=>"Incorect Login or Password"],401);
+            return response()->json(['message' => "Incorect Login or Password"],401);
         }
 
         $user = $user->where('email', $request->get('email'))->first();
@@ -39,7 +36,7 @@ class AuthController extends Controller
 
     public function logout(){
         Auth::logout();
-        return response()->json(['message'=>"403"], 200);
+        return response()->json(['message' => "403"], 200);
     }
 
     public function register(RegisterRequest $request) {
@@ -48,11 +45,11 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'password' => bcrypt($request -> input('password')),
             'confirm_token' => md5(time().str_random(2)),
         ]);
         Auth::login($user);
-        return response()->json(['user'=>Auth::user()], 200);
+        return response()->json(['user' => Auth::user()], 200);
     }
     
    

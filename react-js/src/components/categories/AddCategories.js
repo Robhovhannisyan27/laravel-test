@@ -12,14 +12,14 @@ class AddCategories extends Component {
             name: '',
             category: ''
         }
-        this.changeName = this.changeName.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.getName = this.getName.bind(this);
+        this.addCategory = this.addCategory.bind(this);
     }
 
-    changeName(e){
+    getName(e){
         this.setState({ name: e.target.value });
     }
-    handleClick(){
+    addCategory(){
         axios.post('/api/me/categories', {'category_title': this.state.name}).then((response) => {
             this.setState({'category': response.data.category});
             this.props.addCategory(this.state.category);
@@ -36,8 +36,8 @@ class AddCategories extends Component {
                     </div>
                 </div>    
                 <AddCategoryButton 
-                    changeName={this.changeName} 
-                    handleClick={this.handleClick} 
+                    getName={this.getName} 
+                    addCategory={this.addCategory} 
                     name={this.state.name}
                 />
             </div>          

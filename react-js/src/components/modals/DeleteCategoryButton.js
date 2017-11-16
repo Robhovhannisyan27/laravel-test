@@ -13,7 +13,7 @@ class DeleteCategoryButton extends Component {
                         </div>
                         <div className="modal-body">
                             <p>Remove a category <span id='delete_category'></span> ?</p>
-                            <input type="submit" id='delete_click' onClick={this.props.handleClick} value="Yes" data-dismiss="modal" /> 
+                            <input type="submit" id='delete_click' onClick={this.props.deleteCategory} value="Yes" data-dismiss="modal" /> 
                             <button type="button" style={{marginLeft: 15+'px'}} data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -24,7 +24,7 @@ class DeleteCategoryButton extends Component {
 }
 
 DeleteCategoryButton.propTypes = {
-    handleClick: PropTypes.func
+    deleteCategory: PropTypes.func
 };
 
 export default DeleteCategoryButton;

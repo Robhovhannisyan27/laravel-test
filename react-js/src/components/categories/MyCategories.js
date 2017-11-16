@@ -33,17 +33,17 @@ class MyCategories extends Component {
         this.props.addCategory(category);
     }
     changeCategoryName(category){
-        this.setState({'category': category});
-        this.state.categories.map((val,index) => {
-            if(val.id == category.id){
-                val.category_title = category.category_title;
+        this.setState({category});
+        this.state.categories.map((value,index) => {
+            if(value.id == category.id){
+                value.category_title = category.category_title;
             }
         })
         this.props.changeCategoryName(category);
     }
     deleteCategory(category){
-        this.state.categories.map((val,index) => {
-            if(val.id == category){
+        this.state.categories.map((value,index) => {
+            if(value.id == category){
                 this.state.categories.splice(index,1);
             }
         })
@@ -59,12 +59,12 @@ class MyCategories extends Component {
                             <h2>My Categories</h2>
                             <div className="comp_div">
                             {
-                                this.state.categories.map(function(val, index){ 
+                                this.state.categories.map(function(value, index){ 
                                     return (
                                         <div key={index} className='div'>
-                                            <div className='cat_name'><Link to={'/categories/'+val.id}  className="list-group-item" >{val.category_title}</Link></div>
-                                            <EditCategories  key={val.id} id={val.id} changeCategoryName={changeCategoryName} />
-                                            <DeleteCategories  id={val.id} deleteCategory={deleteCategory} />
+                                            <div className='cat_name'><Link to={'/categories/'+value.id}  className="list-group-item" >{value.category_title}</Link></div>
+                                            <EditCategories  key={value.id} id={value.id} changeCategoryName={changeCategoryName} />
+                                            <DeleteCategories  id={value.id} deleteCategory={deleteCategory} />
                                         </div>
                                     );
                                 })    

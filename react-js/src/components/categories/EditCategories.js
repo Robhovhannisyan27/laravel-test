@@ -10,25 +10,24 @@ class EditCategories extends Component {
         super(props);
         this.state = {
             name: '',
-            cat_id: '',
-            cat_name: ''
+            category_name: ''
         }
         this.handleUpdate = this.handleUpdate.bind(this);
-        this.editClick = this.editClick.bind(this);
-        this.changeName = this.changeName.bind(this);
+        this.openEditCategoriesModal = this.openEditCategoriesModal.bind(this);
+        this.getName = this.getName.bind(this);
         this.modal_id = `edit${this.props.id}`;
     }
-    changeName(e){
+    getName(e){
         this.setState({ name: e.target.value });
     }
-    editClick(){
+    openEditCategoriesModal(){
         $(`#${this.modal_id}`).modal();
     }
     handleUpdate(){
         if(this.state.name != ''){
             axios.put('/api/me/categories/' + this.props.id,{'category_title':this.state.name}).then((response) => {
-                this.setState({'cat_name':response.data[0][0]});
-                this.props.changeCategoryName(this.state.cat_name);
+                this.setState({'category_name':response.data[0][0]});
+                this.props.changeCategoryName(this.state.category_name);
             }).catch((err)=>{
                 
             })
@@ -41,12 +40,12 @@ class EditCategories extends Component {
         return (
             <div className='cat_edit'>      
                 <div className="col-sm-2" data-toggle="modal">
-                    <button type="button" onClick={this.editClick} className="edit_button btn btn-success">Edit Category</button>
+                    <button type="button" onClick={this.openEditCategoriesModal} className="edit_button btn btn-success">Edit Category</button>
                 </div>
                 <EditCategoryButton 
                     modal_id={this.modal_id}
                     body_id={this.props.id} 
-                    changeName={this.changeName} 
+                    getName={this.getName} 
                     name={this.state.name} 
                     handleUpdate={this.handleUpdate} 
                 />

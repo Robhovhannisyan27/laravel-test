@@ -25,9 +25,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category)
+    public function index()
     {
-        $categories = $category->get();
+        $categories = Category::get();
         return response()->json(['categories' => $categories], 200);
     }
 }

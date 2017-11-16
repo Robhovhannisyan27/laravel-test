@@ -13,8 +13,8 @@ class AddCategoryButton extends Component {
                                 <h4 className="modal-title">Add Category</h4>
                             </div>
                             <div className="modal-body">                        
-                                <input type="text" name="category_title" onChange={this.props.changeName} value={this.props.name} placeholder="Enter category name" className='addCategoryName' />
-                                <input type="submit" value="Create" onClick={this.props.handleClick} data-dismiss="modal" />
+                                <input type="text" name="category_title" onChange={this.props.getName} value={this.props.name} placeholder="Enter category name" className='addCategoryName' />
+                                <input type="submit" value="Create" onClick={this.props.addCategory} data-dismiss="modal" />
                                 <button type="button" style={{ marginLeft: 2 + 'px' }} data-dismiss="modal">Cancel</button>    
                             </div>
                         </div>
@@ -26,9 +26,9 @@ class AddCategoryButton extends Component {
 }
 
 AddCategoryButton.propTypes = {
-    changeName: PropTypes.func,
+    getName: PropTypes.func,
     name: PropTypes.string,
-    handleClick: PropTypes.func
+    addCategory: PropTypes.func
 };
 
 export default AddCategoryButton;

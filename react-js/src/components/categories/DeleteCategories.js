@@ -12,17 +12,17 @@ class DeleteCategories extends Component {
             name: '',
             category: ''
         }
-        this.handleClick = this.handleClick.bind(this);
-        this.deleteClick = this.deleteClick.bind(this);
+        this.deleteCategory = this.deleteCategory.bind(this);
+        this.openDeleteCategoriesModal = this.openDeleteCategoriesModal.bind(this);
         this.modal_id = `delete_category${this.props.id}`;
     }
     changeName(e){
         this.setState({ name: e.target.value });
     }
-    deleteClick(){
+    openDeleteCategoriesModal(){
         $(`#${this.modal_id}`).modal();
     }
-    handleClick(){
+    deleteCategory(){
         axios.delete('/api/me/categories/' + this.props.id).then((response) => {
             this.props.deleteCategory(this.props.id);
             }).catch((err)=>{
@@ -33,9 +33,9 @@ class DeleteCategories extends Component {
         return (
             <div className='cat_delete'>         
                 <div data-toggle="modal">   
-                    <button type="button" onClick={this.deleteClick} className=" delete_button btn btn-success">Delete Category</button>
+                    <button type="button" onClick={this.openDeleteCategoriesModal} className=" delete_button btn btn-success">Delete Category</button>
                 </div>       
-                <DeleteCategoryButton modal_id={this.modal_id} handleClick={this.handleClick} />
+                <DeleteCategoryButton modal_id={this.modal_id} deleteCategory={this.deleteCategory} />
             </div>          
         );
     }

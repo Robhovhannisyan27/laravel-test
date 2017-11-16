@@ -10,10 +10,10 @@ class DeletePost extends Component {
         this.state = {
             delete: false
         }
-        this.handleClick = this.handleClick.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
         
-    handleClick(){
+    deletePost(){
         axios.delete('/api/me/posts/' + this.props.post_id).then((response) => {
             this.setState({ delete: true });
             }).catch((err)=>{
@@ -22,17 +22,17 @@ class DeletePost extends Component {
     }
         
     render() {
-        let a;
+        let go_to_posts;
         if(this.state.delete){
-            a = <Redirect to='/my-posts' />;
+            go_to_posts = <Redirect to='/my-posts' />;
         }
         return (
             <div>
-                {a}
+                {go_to_posts}
                 <div className='deletePost' data-toggle="modal" data-target="#delete_post" >
                     <button type="button" className="delete_post_button btn btn-success">Delete Post</button>
                 </div>
-                <DeletePostButton handleClick={this.handleClick} />    
+                <DeletePostButton deletePost={this.deletePost} />    
             </div>  
         );
     }

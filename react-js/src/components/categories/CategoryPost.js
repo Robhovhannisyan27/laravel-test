@@ -11,15 +11,15 @@ class CategoryPost extends Component {
             posts: []
         }
         this.addPost = this.addPost.bind(this);
-        this.categoryPosts = this.categoryPosts.bind(this);
+        this.showCategoryPosts = this.showCategoryPosts.bind(this);
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.match.params.id !== this.props.match.params.id)
         {
-            this.categoryPosts(nextProps.match.params.id);
+            this.showCategoryPosts(nextProps.match.params.id);
         }
     }
-    categoryPosts(id){
+    showCategoryPosts(id){
         axios.get('/api/categories/' + id + '/posts').then((response) => {
             this.setState({ posts: response.data[0].data})
             }).catch((err)=>{
@@ -32,7 +32,7 @@ class CategoryPost extends Component {
         this.setState({ posts });
     }
     componentDidMount(){
-        this.categoryPosts(this.props.match.params.id);
+        this.showCategoryPosts(this.props.match.params.id);
     }
 
     render() {

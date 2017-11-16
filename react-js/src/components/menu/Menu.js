@@ -6,16 +6,16 @@ import Dropdown from './Dropdown';
 class Menu extends Component {
 
     render() {
-        let userLogin;
+        let is_user_logged_in;
         if(sessionStorage.getItem('user_id')){
-            userLogin = <Dropdown name={sessionStorage.getItem('name')} />;
+            is_user_logged_in = <Dropdown name={sessionStorage.getItem('name')} />;
         } else{
-            userLogin = <Links />
+            is_user_logged_in = <Links />
         }
         return (
             <div>
                 <Home />
-                {userLogin}
+                {is_user_logged_in}
             </div> 
         );
     }

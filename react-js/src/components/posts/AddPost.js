@@ -10,24 +10,24 @@ class AddPost extends Component {
         super(props);
         this.state = {
             categories: [],
-            title: '',
-            text: '',
-            select: '',
+            new_post_title: '',
+            new_post_text: '',
+            select_categories: '',
             image: '',
             success: ''
         }
-        this.handleClick = this.handleClick.bind(this);
-        this.changeTitle = this.changeTitle.bind(this);
-        this.changeText = this.changeText.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.getPostTitle = this.getPostTitle.bind(this);
+        this.getPostText = this.getPostText.bind(this);
         this.changeSelect = this.changeSelect.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
     }
-    handleClick(){
+    handleUpdate(){
         let data = new FormData();
         data.append('image', this.state.image);
-        data.append('title', this.state.title);
-        data.append('longtext', this.state.text);
-        data.append('category_id', this.state.select);
+        data.append('title', this.state.new_post_title);
+        data.append('longtext', this.state.new_post_text);
+        data.append('category_id', this.state.select_categories);
             
         axios.post('/api/me/posts', data).then((response) => {
             this.props.addPost(response.data.post);    
@@ -35,14 +35,14 @@ class AddPost extends Component {
 
         })
     }
-    changeTitle(e){
-        this.setState({'title': e.target.value});
+    getPostTitle(e){
+        this.setState({'new_post_title': e.target.value});
     }
-    changeText(e){
-        this.setState({'text': e.target.value});
+    getPostText(e){
+        this.setState({'new_post_text': e.target.value});
     }
     changeSelect(e){
-        this.setState({'select': e.target.value});
+        this.setState({'select_categories': e.target.value});
     }
     componentWillMount(){
         axios.get('/api/me/categories').then((response) => {
@@ -63,21 +63,20 @@ class AddPost extends Component {
     }
 
     render() {
-        let testInput = this.testInput;
         return (
             <div>
                 <div className='modal_div' data-toggle="modal" data-target="#addPost">
                     <button type="button"  className="btn btn-success">Add Post</button>
                 </div>
                 <AddPostButton 
-                    changeTitle={this.changeTitle}
-                    changeText={this.changeText}
-                    text={this.state.text}
+                    getPostTitle={this.getPostTitle}
+                    getPostText={this.getPostText}
+                    new_post_text={this.state.new_post_text}
                     onFileChange = {this.onFileChange}
                     changeSelect = {this.changeSelect}
-                    selecet = {this.state.select}
+                    select_categories = {this.state.select_categories}
                     categories={this.state.categories}
-                    handleClick={this.handleClick}
+                    handleUpdate={this.handleUpdate}
                 />
             </div>
         );

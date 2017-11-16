@@ -25,19 +25,18 @@ class PostsController extends Controller
 
     public function index()
     {
-        // dd(Auth::user());
-        $my_posts = $this->post->where('user_id',Auth::user()->id)->orderby('id','desc')->Paginate(9);
-        return response()->json(['posts', $my_posts],200);
+        $posts = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate(9);
+        return response()->json(['posts', $posts],200);
     }
 
     
     public function store(PostRequest $request)
     {
-        $inputs = $request->inputs();
-        $inputs['user_id'] = Auth::user()->id;
-        $create_post = $this->post->create($inputs);
-        if($create_post) {
-            return response()->json(['post' => $create_post, 'success' => 'fafa'], 201);
+        $crateing_posts_fields = $request->inputs();
+        $crateing_posts_fields['user_id'] = Auth::user()->id;
+        $result = $this->post->create($crateing_posts_fields);
+        if($result) {
+            return response()->json(['post' => $result, 'success' => 'fafa'], 201);
         } 
         return response()->json(['error' => 'Something went wrong!!!'], 400);
     }
@@ -45,8 +44,8 @@ class PostsController extends Controller
     
     public function show($id)
     {
-        $my_posts=$this->post->where('id',$id)->get();
-        return response()->json(['post' => $my_posts], 200);
+        $posts=$this->post->where('id',$id)->get();
+        return response()->json(['post' => $posts], 200);
     }
 
     
@@ -68,12 +67,11 @@ class PostsController extends Controller
             }
         }
 
-        $update_post = $this->post->where('id', $id)->where('user_id',Auth::user()->id)->update($inputs);
+        $result = $this->post->where('id', $id)->where('user_id',Auth::id())->update($inputs);
 
-        if($update_post) {
-            $get_post = $this->post->where('id', $id)->get();
-            
-            return response()->json([$get_post], 200);
+        if($result) {
+            $get_posts = $this->post->where('id', $id)->get();
+            return response()->json([$get_posts], 200);
         } 
         return response()->json(['error'], 400);
         

@@ -12,7 +12,7 @@ class Categories extends Component {
             categories:  [],
             addCategory: ''
         }
-        this.handleClick = this.handleClick.bind(this);
+        this.goToCurrentCategory = this.goToCurrentCategory.bind(this);
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.addCategory !== this.props.addCategory){
@@ -22,17 +22,17 @@ class Categories extends Component {
         }
         if(nextProps.editCategory !== this.props.editCategory){
             let categories = this.state.categories;
-            categories.map((val,index) => {
-                if(val.id == nextProps.editCategory.id){
-                    val.category_title = nextProps.editCategory.category_title;
+            categories.map((value,index) => {
+                if(value.id == nextProps.editCategory.id){
+                    value.category_title = nextProps.editCategory.category_title;
                 }
             })
             this.setState({categories}); 
         }
         if(nextProps.deleteCategory !== this.props.deleteCategory){
             let deleteCategories = this.state.categories;
-            deleteCategories.map((val,index) => {
-                if(val.id == nextProps.deleteCategory){
+            deleteCategories.map((value,index) => {
+                if(value.id == nextProps.deleteCategory){
                     let categories = this.state.categories;
                     categories.splice(index,1);
                     this.setState({categories});
@@ -47,21 +47,21 @@ class Categories extends Component {
             
         }) 
     }
-    handleClick(){
-        this.props.allCategories(this.state.categories);
+    goToCurrentCategory(){
+        this.props.showCategories(this.state.categories);
     }
     
     render() {
-        const handleClick = this.handleClick;
+        const goToCurrentCategory = this.goToCurrentCategory;
         return (
-            <div  className="col-sm-2">
+            <div className="col-sm-2">
                 <div className='categories'>
                 <h2>Categories</h2>
                 <div className="list-group cat_div">
                 {
-                     this.state.categories.map(function(val, index){ 
-                        return <Link to={'/categories/'+val.id} onClick={handleClick} className="list-group-item" key={val.id}>{val.category_title}</Link>;
-                     })                      
+                    this.state.categories.map(function(val, index){ 
+                        return <Link to={'/categories/'+val.id} onClick={goToCurrentCategory} className="list-group-item" key={val.id}>{val.category_title}</Link>;
+                    })                      
                 }
                 </div>
                 </div> 
@@ -71,7 +71,7 @@ class Categories extends Component {
 }
 
 Categories.propTypes = {
-    allCategories: PropTypes.func,
+    showCategories: PropTypes.func,
 };
 
 export default Categories;
