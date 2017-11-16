@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import './categories.css';
 import DeleteCategoryButton from '../modals/DeleteCategoryButton';
@@ -10,7 +9,6 @@ class DeleteCategories extends Component {
         super(props);
         this.state = {
             name: '',
-            category: ''
         }
         this.deleteCategory = this.deleteCategory.bind(this);
         this.openDeleteCategoriesModal = this.openDeleteCategoriesModal.bind(this);

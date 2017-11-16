@@ -10,7 +10,7 @@ class AddCategories extends Component {
         super(props);
         this.state = {
             name: '',
-            category: ''
+            new_category: ''
         }
         this.getName = this.getName.bind(this);
         this.addCategory = this.addCategory.bind(this);
@@ -21,8 +21,8 @@ class AddCategories extends Component {
     }
     addCategory(){
         axios.post('/api/me/categories', {'category_title': this.state.name}).then((response) => {
-            this.setState({'category': response.data.category});
-            this.props.addCategory(this.state.category);
+            this.setState({'new_category': response.data.category});
+            this.props.addCategory(this.state.new_category);
              }).catch((err)=>{
 
             })

@@ -53,7 +53,7 @@ class App extends Component {
         if(sessionStorage.getItem('user_id')){
             categories = (
                 <Categories 
-                    addCategory= {this.state.category} 
+                    added_category= {this.state.category} 
                     editCategory={this.state.editCategoryName} 
                     deleteCategory={this.state.deleteCategory} 
                     showCategories={this.showCategories} 

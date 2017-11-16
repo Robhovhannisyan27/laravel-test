@@ -10,14 +10,14 @@ class Categories extends Component {
         super(props);
         this.state = {
             categories:  [],
-            addCategory: ''
+            added_category: ''
         }
         this.goToCurrentCategory = this.goToCurrentCategory.bind(this);
     }
     componentWillReceiveProps(nextProps){
-        if(nextProps.addCategory !== this.props.addCategory){
+        if(nextProps.added_category !== this.props.added_category){
             let categories = this.state.categories;
-            categories.push(nextProps.addCategory);
+            categories.push(nextProps.added_category);
             this.setState({categories});
         }
         if(nextProps.editCategory !== this.props.editCategory){
