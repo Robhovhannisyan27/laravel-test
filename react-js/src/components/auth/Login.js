@@ -55,7 +55,7 @@ class Login extends Component {
         if(this.state.id){
             main = <Redirect to='/' />;
         }
-  	return (
+    return (
         <div className="container">
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">

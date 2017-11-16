@@ -6,50 +6,50 @@ import AddPost from './AddPost';
 
 
 class MyPosts extends Component {
-		constructor(props){
-			super(props);
-			this.state = {
-				posts: []
-			}
-			this.addPost = this.addPost.bind(this);
-		}
-		componentWillMount(){
-			axios.get('/api/me/posts').then((response) => {
-				let posts = Object.values(response.data[1].data);
-				this.setState({ posts: posts});
-				}).catch((err)=>{
+        constructor(props){
+            super(props);
+            this.state = {
+                posts: []
+            }
+            this.addPost = this.addPost.bind(this);
+        }
+        componentWillMount(){
+            axios.get('/api/me/posts').then((response) => {
+                let posts = Object.values(response.data[1].data);
+                this.setState({ posts: posts});
+                }).catch((err)=>{
 
-			})
-		}
-		addPost(post){
-			let posts = this.state.posts;
-			posts.unshift(post);
-			this.setState({ posts});
-		}
-		render() {
-			return (
-				<div>
-					<div className="col-sm-8 row posts" id='addPosts'>
-						{
-							this.state.posts.map(function(val, index){ 
-									return (
-										<div key={val.id}>
-											<Link to={'/posts/' + val.id}>
-												<div className="post col-sm-3">
-														<div className="post_image"><img src={'../../image/' + val.image} /></div>
-														<div className="post_title">{val.title}</div>
-														<div className="post_text"><p>{val.text}</p></div>
-												</div>
-											</Link>
-										</div>    
-										);
-							})    
-						}
-					</div>
-					<AddPost addPost={this.addPost} />
-				</div>  
-			);
-		}
+            })
+        }
+        addPost(post){
+            let posts = this.state.posts;
+            posts.unshift(post);
+            this.setState({ posts});
+        }
+        render() {
+            return (
+                <div>
+                    <div className="col-sm-8 row posts" id='addPosts'>
+                        {
+                            this.state.posts.map(function(val, index){ 
+                                    return (
+                                        <div key={val.id}>
+                                            <Link to={'/posts/' + val.id}>
+                                                <div className="post col-sm-3">
+                                                        <div className="post_image"><img src={'../../image/' + val.image} /></div>
+                                                        <div className="post_title">{val.title}</div>
+                                                        <div className="post_text"><p>{val.text}</p></div>
+                                                </div>
+                                            </Link>
+                                        </div>    
+                                        );
+                            })    
+                        }
+                    </div>
+                    <AddPost addPost={this.addPost} />
+                </div>  
+            );
+        }
 }
 
 export default MyPosts;

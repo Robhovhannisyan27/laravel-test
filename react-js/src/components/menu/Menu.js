@@ -5,20 +5,20 @@ import Dropdown from './Dropdown';
 
 class Menu extends Component {
 
-	render() {
-		let userLogin;
-		if(sessionStorage.getItem('user_id')){
-			userLogin = <Dropdown name={sessionStorage.getItem('name')} />;
-		} else{
-			userLogin = <Links />
-		}
-		return (
-			<div>
-				<Home />
-				{userLogin}
-			</div> 
-		);
-	}
+    render() {
+        let userLogin;
+        if(sessionStorage.getItem('user_id')){
+            userLogin = <Dropdown name={sessionStorage.getItem('name')} />;
+        } else{
+            userLogin = <Links />
+        }
+        return (
+            <div>
+                <Home />
+                {userLogin}
+            </div> 
+        );
+    }
 }
 
 export default Menu;
