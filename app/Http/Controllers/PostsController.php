@@ -25,9 +25,9 @@ class PostsController extends Controller
     {
         $my_categories = $this->category->where('user_id',Auth::id())->get();
         $categories = $this->category->get();
-        $category_post = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate('9');
+        $category_posts = $this->post->where('user_id',Auth::id())->orderby('id','desc')->Paginate('9');
         return view('my_posts', [
-            'category_post'=>$category_post, 
+            'category_posts'=>$category_posts, 
             'categories'=>$categories, 
             'my_categories'=>$my_categories
             ]);
@@ -36,9 +36,9 @@ class PostsController extends Controller
     
     public function store(PostRequest $request)
     {
-        $post = $this->post->create($request->inputs());
-        if($post) {
-            return response()->json(['post' => $post, 'success' => 'fafa'], 200);
+        $result = $this->post->create($request->inputs());
+        if($result) {
+            return response()->json(['post' => $result, 'success' => 'fafa'], 200);
         }
         return response()->json(['error' => 'Something went wrong!!!'], 400);
     }

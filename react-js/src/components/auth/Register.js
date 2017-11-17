@@ -12,7 +12,7 @@ class Register extends Component {
             error: '',
             name: '',
             password_confirmation: '',
-            id: null
+            registered_user_id: null
         }
         this.getEmail = this.getEmail.bind(this);
         this.doRegister = this.doRegister.bind(this);
@@ -24,8 +24,8 @@ class Register extends Component {
         event.preventDefault(); 
         axios.post('/api/register', {email: this.state.email, password: this.state.password, name: this.state.name, password_confirmation:this.state.password_confirmation})
         .then((response) => {
-            this.setState({ id:response.data.user.id, name:sessionStorage.getItem('name'), error: ''});
-                sessionStorage.setItem('user_id', this.state.id);
+            this.setState({ registered_user_id:response.data.user.id, name:sessionStorage.getItem('name'), error: ''});
+                sessionStorage.setItem('user_id', this.state.registered_user_id);
                 sessionStorage.setItem('name', response.data.user.name);
                 this.props.userRegister(this.state.name);
         }).catch((err) => {
@@ -48,7 +48,7 @@ class Register extends Component {
     }
     render() {
         let redirect_to_home;
-        if(this.state.id){
+        if(this.state.registered_user_id){
             redirect_to_home = <Redirect to='/' />;
         }
         return (

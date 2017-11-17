@@ -13,7 +13,6 @@ class Login extends Component {
             password: '',
             error: '',
             id: null,
-            user: '',
             name: ''
         }
         this.getEmail = this.getEmail.bind(this);
