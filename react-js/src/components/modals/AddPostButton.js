@@ -62,7 +62,7 @@ AddPostButton.propTypes = {
     getPostTitle: PropTypes.func,
     new_post_title: PropTypes.string,
     new_post_text: PropTypes.string,
-    select_categories: PropTypes.number,
+    
     getPostText: PropTypes.func,
     onFileChange: PropTypes.func,
     changeSelect: PropTypes.func,

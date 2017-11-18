@@ -2781,7 +2781,7 @@ var Register = function (_Component) {
             event.preventDefault();
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/register', { email: this.state.email, password: this.state.password, name: this.state.name, password_confirmation: this.state.password_confirmation }).then(function (response) {
                 _this2.setState({ registered_user_id: response.data.user.id, name: sessionStorage.getItem('name'), error: '' });
-                sessionStorage.setItem('user_id', _this2.state.registered_user_id);
+                sessionStorage.setItem('user_id', response.data.user.id);
                 sessionStorage.setItem('name', response.data.user.name);
                 _this2.props.userRegister(_this2.state.name);
             }).catch(function (err) {
@@ -29544,7 +29544,7 @@ AddPostButton.propTypes = {
     getPostTitle: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     new_post_title: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
     new_post_text: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-    select_categories: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
+
     getPostText: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     onFileChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     changeSelect: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,

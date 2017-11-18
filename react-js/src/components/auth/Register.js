@@ -25,9 +25,9 @@ class Register extends Component {
         axios.post('/api/register', {email: this.state.email, password: this.state.password, name: this.state.name, password_confirmation:this.state.password_confirmation})
         .then((response) => {
             this.setState({ registered_user_id:response.data.user.id, name:sessionStorage.getItem('name'), error: ''});
-                sessionStorage.setItem('user_id', this.state.registered_user_id);
-                sessionStorage.setItem('name', response.data.user.name);
-                this.props.userRegister(this.state.name);
+            sessionStorage.setItem('user_id', response.data.user.id);
+            sessionStorage.setItem('name', response.data.user.name);
+            this.props.userRegister(this.state.name);
         }).catch((err) => {
             this.setState({error: Object.values(err.response.data.errors)[0]});
         })
