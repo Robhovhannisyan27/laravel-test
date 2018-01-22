@@ -33,18 +33,17 @@
    </div>
    @endif
 
-    <div class='col-sm-2 row'>
-        @if(isset($my_posts))
-        
-          @foreach($my_posts as $post)
+    <div class='col-sm-2 row'>      
+        @foreach($posts as $post)
+            @if(Gate::allows('update-post', $post))
             <div style="float:right;" data-toggle="modal" data-target="#edit_post">
                 <button type="button" data-id="{{$post->id}}" data-title="{{$post->title}}" class="edit_post_button btn btn-success">Edit Post</button>
             </div>
             <div style="float:right;margin-right: 20px;" data-toggle="modal" data-target="#delete_post" >
                 <button type="button" data-id="{{$post->id}}" data-title="{{$post->title}}"  class="delete_post_button btn btn-success">Delete Post</button>
             </div>
-          @endforeach
-         @endif                
+            @endif
+        @endforeach             
     </div> 
            
  </div>       
